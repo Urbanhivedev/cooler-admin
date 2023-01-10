@@ -92,9 +92,11 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor:"#60A1EC",
     color: theme.palette.common.white,
+    
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
+    width:300,
   },
 }));
 
@@ -205,7 +207,7 @@ export default function CoolerList({jobs}) {
       <br/>
       <p style={{fontSize: '26px', marginLeft: '5px', color: 'black'}}><b>ALL COOLERS</b></p><br/>
       <hr />
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper}  >
         <Table sx={{ maxWidth: 1300 }} aria-label="custom pagination table">
           <TableHead>
             <TableRow>
@@ -226,21 +228,21 @@ export default function CoolerList({jobs}) {
                 )
               : jobList
             ).map((row) => (
-              <TableRow key={row.groupId}>
+              <TableRow key={row.groupId && row.groupId}>
                 <TableCell component="th" scope="row">
-                  {row.groupName}
+                  {row.groupName && row.groupName}
                 </TableCell>
                 <TableCell style={{ width: 140 }} align="right">
-                  ${row.amount}
+                  ${row.amount && row.amount}
                 </TableCell>
                 <TableCell style={{ width: 140 }} align="right">
-                {(new Date(row.accountCreated.seconds*1000)).toLocaleDateString()}
+                {row.accountCreated?(new Date(row.accountCreated.seconds*1000)).toLocaleDateString():"01/01/2023"}
                 </TableCell>
                 <TableCell style={{ width: 140 }} align="right">
-                {row.noOfSavers}
+                {row.noOfSavers && row.noOfSavers}
                 </TableCell>
                 <TableCell style={{ width: 140 }} align="right">
-                {row.status}
+                {row.status && row.status}
                 </TableCell>
                 <TableCell style={{ width: 180 }} align="right">
                   <Button
