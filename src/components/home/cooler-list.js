@@ -154,7 +154,7 @@ export default function CoolerList({jobs}) {
     setPage(0);
   };
   const viewJobsFxn = (id) => {
-    navigate(`/dashboard/view-users/${id}`);
+    navigate(`/dashboard/view-coolers/${id}`);
   };
 
 

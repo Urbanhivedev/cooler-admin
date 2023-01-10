@@ -53,19 +53,20 @@ export const addCooler = (job, setLoading, clearState) => async (dispatch) => {
 };
 
 //9th Jan - not ready to actually add files to the groups collection, so havent changed the fields to the appropriate ones yet
-export const updateCooler = (job, setLoading, clearState, history) => async (dispatch) => {
+export const updateCooler = (cooler, setLoading, history) => async (dispatch) => {
 
-    var coolerRef = db.collection("groups").doc(job.id);
+    var coolerRef = db.collection("groups").doc(cooler.id);
     const coolerData = coolerRef.update({
-        title: job.title,
-        description: job.description,
-        location: job.location,
-        rate: job.rate
+        amount: cooler.amount,
+        status: cooler.status,
+        admins: cooler.admins,
+        members: cooler.members,
+        noOfSavers: cooler.noOfSavers
     })
     .then(() => {
         setLoading(false);
         alert('groups have been updated.✔');
-        history.push('/company/jobs');
+        history('/dashboard/create-coolers');
         
     })
     .catch((error) => {

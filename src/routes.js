@@ -8,6 +8,8 @@ import Page404 from './pages/Page404';
 import HomePage from './pages/HomePage';
 import CViewJob from './pages/CViewJobs';
 import CUpdateJob from './pages/CUpdateJob';
+import ViewCooler from './pages/ViewCoolers';
+import UpdateCooler from './pages/UpdateCooler';
 import ViewAllCoolers from './pages/ViewAllCoolers';
 import CoolersPage from './pages/CoolersPage';
 import MyCoolersPage from './pages/MyCoolersPage';
@@ -37,6 +39,8 @@ export default function Router() {
         { path: 'join-public-cooler', element: <PublicCoolerJoin /> },
         { path: 'join-private-cooler', element: <PrivateCoolerJoin /> },
         { path: 'create-cooler', element: <ViewAllCoolers /> },
+        { path: 'view-coolers/:id', element: <ViewCooler /> },
+        { path: 'update-coolers/:id', element: <UpdateCooler /> },
       ],
     },
     {
