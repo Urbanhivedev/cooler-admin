@@ -5,14 +5,14 @@ import "firebase/auth";
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDRBwCalzG0y_gWa7dZyOBaWTcSztXhk7I",
-  authDomain: "md-liaison.firebaseapp.com",
-  projectId: "md-liaison",
-  storageBucket: "md-liaison.appspot.com",
-  messagingSenderId: "499382413186",
-  appId: "1:499382413186:web:242d7d6ff13d832faf919b",
+  apiKey: "AIzaSyDXYDyDFyCGZm1ukPFjGcgltftOBDeqqPM",
+  authDomain: "coworkpay.firebaseapp.com",
+  projectId: "coworkpay",
+  storageBucket: "coworkpay.appspot.com",
+  messagingSenderId: "1087411400971",
+  appId: "1:1087411400971:web:b34d3ebc1da344c6e1b20e",
+  measurementId: "G-2TF1H866QZ"
 };
-
 
 // Initialize Firebase
 export const fb = firebase.initializeApp(firebaseConfig);

@@ -6,6 +6,8 @@ import SimpleLayout from './layouts/simple';
 import LoginPage from './pages/LoginPage';
 import Page404 from './pages/Page404';
 import HomePage from './pages/HomePage';
+import CViewJob from './pages/CViewJobs';
+import ViewAllCoolers from './pages/ViewAllCoolers';
 import CoolersPage from './pages/CoolersPage';
 import MyCoolersPage from './pages/MyCoolersPage';
 import PublicCoolerPage from './pages/PublicCoolerPage';
@@ -26,14 +28,13 @@ export default function Router() {
         // { element: <Navigate to="/dashboard/app" />, index: true },
         // { path: 'home', element: <DashboardAppPage /> },
         { path: 'home', element: <HomePage /> },
-        { path: 'cooler', element: <CoolersPage /> },
-        { path: 'my-cooler', element: <MyCoolersPage /> },
+        { path: 'view-users/:id', element: <CViewJob /> },
         { path: 'public-cooler', element: <PublicCoolerPage /> },
         { path: 'private-cooler', element: <PrivateCoolerPage /> },
         { path: 'members', element: <MembersPage /> },
         { path: 'join-public-cooler', element: <PublicCoolerJoin /> },
         { path: 'join-private-cooler', element: <PrivateCoolerJoin /> },
-        { path: 'create-cooler', element: <CreateCoolerPage /> },
+        { path: 'create-cooler', element: <ViewAllCoolers /> },
       ],
     },
     {
