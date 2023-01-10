@@ -27,6 +27,8 @@ export default function NavSection({ data = [], ...other }) {
               <SubNavItem key={c.title} item={c}/>
             ))
            }
+           <br/> 
+           <br/>
           </>
         ))}
       </List>
@@ -48,6 +50,7 @@ function NavItem({ item }) {
       component={RouterLink}
       to={path}
       sx={{
+        
         '&.active': {
           color: 'black',
           // bgcolor: '#66000000',
@@ -57,10 +60,12 @@ function NavItem({ item }) {
       }}
     >
       {iconLabel != 'msg' && iconLabel != 'settings' && <StyledNavItemIcon sx={{color: '#FFFFFF', fontSize: '20px'}}>{icon && icon}</StyledNavItemIcon>}
+      
       {iconLabel === 'msg' && <StyledNavItemIcon sx={{color: '#FFFFFF', fontSize: '20px'}}><MessageIcon /></StyledNavItemIcon>}
+      
       {iconLabel === 'settings' && <StyledNavItemIcon sx={{color: '#FFFFFF', fontSize: '20px'}}><SettingsIcon /></StyledNavItemIcon>}
 
-      <ListItemText disableTypography primary={title} sx={{color: '#FFFFFF', fontSize: '18px'}}/>
+      <ListItemText disableTypography primary={title} sx={{color: '#FFFFFF', fontSize: '28px'}}/>
 
       {info && info}
     </StyledNavItem>
@@ -74,11 +79,13 @@ function SubNavItem({ item }) {
       component={RouterLink}
       to={path}
       sx={{
+        
         '&.active': {
           // color: 'black',
           // bgcolor: '#66000000',
           backgroundColor: 'black',
           fontWeight: 'fontWeightBold',
+          
         },
       }}
     >
