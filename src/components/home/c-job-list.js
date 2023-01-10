@@ -234,7 +234,7 @@ export default function CJobList({jobs}) {
                   {row.email}
                 </TableCell>
                 <TableCell style={{ width: 140 }} align="right">
-                {(new Date(row.accountCreated.seconds*1000)).toLocaleDateString()}
+                {row.accountCreated && (new Date(row.accountCreated.seconds*1000)).toLocaleDateString()}
                 </TableCell>
                 <TableCell style={{ width: 140 }} align="right">
                 {row.loanBalance}

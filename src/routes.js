@@ -7,6 +7,7 @@ import LoginPage from './pages/LoginPage';
 import Page404 from './pages/Page404';
 import HomePage from './pages/HomePage';
 import CViewJob from './pages/CViewJobs';
+import CUpdateJob from './pages/CUpdateJob';
 import ViewAllCoolers from './pages/ViewAllCoolers';
 import CoolersPage from './pages/CoolersPage';
 import MyCoolersPage from './pages/MyCoolersPage';
@@ -29,6 +30,7 @@ export default function Router() {
         // { path: 'home', element: <DashboardAppPage /> },
         { path: 'home', element: <HomePage /> },
         { path: 'view-users/:id', element: <CViewJob /> },
+        { path: 'update-users/:id', element: <CUpdateJob /> },
         { path: 'public-cooler', element: <PublicCoolerPage /> },
         { path: 'private-cooler', element: <PrivateCoolerPage /> },
         { path: 'members', element: <MembersPage /> },

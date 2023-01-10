@@ -50,19 +50,19 @@ export const addJob = (job, setLoading, clearState) => async (dispatch) => {
     });
 
 };
-export const updateJob = (job, setLoading, clearState, history) => async (dispatch) => {
+export const updateJob = (job, setLoading, history) => async (dispatch) => {
 
     var jobRef = db.collection("users").doc(job.id);
     const jobData = jobRef.update({
-        title: job.title,
-        description: job.description,
-        location: job.location,
-        rate: job.rate
+        amountAccrued: job.amountAccrued,
+        groups: job.groups,
+        walletBalance: job.walletBalance,
+        loanBalance: job.loanBalance
     })
     .then(() => {
         setLoading(false);
         alert('users have been updated.✔');
-        history.push('/company/jobs');
+        history('/dashboard/home');
         
     })
     .catch((error) => {
