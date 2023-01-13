@@ -177,7 +177,7 @@ export default function CUpdateJob() {
             <Grid item xs={12} md={8} lg={2} style={{height: '40%'}}>   
             </Grid>
 
-            <Grid item xs={4} md={6} lg={3} style={{border: '0px solid red', height: '50%', marginTop: '14px'}}>
+           {/* <Grid item xs={4} md={6} lg={3} style={{border: '0px solid red', height: '50%', marginTop: '14px'}}>
              <h4>LOAN BALANCE ($)</h4>
             </Grid>
              <Grid item xs={12} md={8} lg={6} style={{height: '40%'}}>
@@ -194,7 +194,7 @@ export default function CUpdateJob() {
             </Grid>
             <Grid item xs={12} md={8} lg={2} style={{height: '40%'}}>
               
-            </Grid>
+            </Grid>*/}
           </Grid>
 
           <center>

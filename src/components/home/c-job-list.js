@@ -212,7 +212,7 @@ export default function CJobList({jobs}) {
               <StyledTableCell>Name</StyledTableCell>
               <StyledTableCell align="right">Email</StyledTableCell>
               <StyledTableCell align="right">Registered On</StyledTableCell>
-              <StyledTableCell align="right">Loan Balace</StyledTableCell>
+              
               <StyledTableCell align="right">Wallet Balance</StyledTableCell>
               <StyledTableCell align="center"></StyledTableCell>
               <StyledTableCell align="right"></StyledTableCell>
@@ -236,9 +236,7 @@ export default function CJobList({jobs}) {
                 <TableCell style={{ width: 140 }} align="right">
                 {row.accountCreated && (new Date(row.accountCreated.seconds*1000)).toLocaleDateString()}
                 </TableCell>
-                <TableCell style={{ width: 140 }} align="right">
-                {row.loanBalance}
-                </TableCell>
+                
                 <TableCell style={{ width: 140 }} align="right">
                 {row.walletBalance}
                 </TableCell>

@@ -19,7 +19,7 @@ const navConfig = [
   },
   {
     title: 'settings',
-    path: '/dashboard/members',
+    //path: null,
     iconLabel: 'settings',
   },
 ];
