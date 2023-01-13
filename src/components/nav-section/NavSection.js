@@ -50,12 +50,15 @@ function NavItem({ item }) {
       component={RouterLink}
       to={path}
       sx={{
-        
+        width:"100%",
+        borderRadius:"10px",
         '&.active': {
           color: 'black',
           // bgcolor: '#66000000',
           backgroundColor: 'black',
           fontWeight: 'fontWeightBold',
+          borderRadius:"10px",
+
         },
       }}
     >
@@ -65,7 +68,7 @@ function NavItem({ item }) {
       
       {iconLabel === 'settings' && <StyledNavItemIcon sx={{color: '#FFFFFF', fontSize: '20px'}}><SettingsIcon /></StyledNavItemIcon>}
 
-      <ListItemText disableTypography primary={title} sx={{color: '#FFFFFF', fontSize: '28px'}}/>
+      <ListItemText disableTypography primary={title} sx={{color: '#FFFFFF', fontSize: '18px'}}/>
 
       {info && info}
     </StyledNavItem>

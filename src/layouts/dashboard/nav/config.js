@@ -17,11 +17,11 @@ const navConfig = [
     // icon: icon('ic_msg'),
     iconLabel: 'msg',
   },
-  {
+  /*{
     title: 'settings',
-    //path: null,
+    path: null,
     iconLabel: 'settings',
-  },
+  },*/
 ];
 
 export default navConfig;
