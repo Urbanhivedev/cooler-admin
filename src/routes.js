@@ -3,7 +3,7 @@ import { Navigate, useRoutes } from 'react-router-dom';
 import DashboardLayout from './layouts/dashboard';
 import SimpleLayout from './layouts/simple';
 
-import LoginPage from './pages/LoginPage';
+import SigninPage from './pages/SigninPage';
 import Page404 from './pages/Page404';
 import HomePage from './pages/HomePage';
 import CViewJob from './pages/CViewJobs';
@@ -24,6 +24,12 @@ import PrivateCoolerJoin from './pages/PrivateCoolerJoin';
 export default function Router() {
   const routes = useRoutes([
     {
+      path: '/login',
+      
+      element: <SigninPage />,
+    },
+    
+    {
       path: '/dashboard',
       element: <DashboardLayout />,
       children: [
@@ -43,10 +49,7 @@ export default function Router() {
         { path: 'update-coolers/:id', element: <UpdateCooler /> },
       ],
     },
-    {
-      path: 'login',
-      element: <LoginPage />,
-    },
+    
     {
       element: <SimpleLayout />,
       children: [

@@ -1,18 +1,18 @@
 import { db, fb, auth, storage } from '../../config/firebase';
-import { clearUser, loginFailed, loginSuccess, signupFailed } from '../reducers/auth.slice';
+import {  loginFailed, loginSuccess} from '../reducers/loggedIn.slice';
 import { v4 as uuidv4 } from 'uuid';
 
-  export const signin = (user, history, setLoading) => async (dispatch) => {
+  export const signin = (user, navigate) => async (dispatch) => {
     fb.auth().signInWithEmailAndPassword(user.email, user.password)
     .then((userCredential) => {
       // Signed in
       var user = userCredential.user;
       console.log('Signed In user is: ', user.email);
       dispatch(loginSuccess({ user }));
-      history.push('/');
+      navigate('/dashboard/home');
     })
     .catch((error) => {
-      setLoading(false);
+      
       var errorCode = error.code;
       var errorMessage = error.message;
       console.log('Error Code is: ', errorCode, + ' Msg is: ', errorMessage);
@@ -42,7 +42,7 @@ export const signup = (user, file, history, setLoading, url) => async (dispatch)
   }).catch((err) => {
     console.error("Error signing up: ", err);
     var errorMessage = err.message;
-    dispatch(signupFailed({ errorMessage }));
+   // dispatch(signupFailed({ errorMessage }));
     setLoading(false);
   })
 }
@@ -79,7 +79,7 @@ export const uploadImage = (user, file, history, setLoading) => async (dispatch)
 export const logout = (history) => async (dispatch) => {
   fb.auth().signOut().then(() => {
     console.log('logout successful!');
-    dispatch(clearUser());
+    //dispatch(clearUser());
     history.push('/company/signin');
   }).catch((error) => {
     // An error happened.

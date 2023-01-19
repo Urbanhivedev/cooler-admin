@@ -18,7 +18,7 @@ const theme = createTheme();
 
 export default function CUpdateJob() {
     const dispatch = useDispatch();
-    const history = useNavigate();
+    const navigate = useNavigate();
     const params = useParams();
     const locationV = useLocation();
     const { job } = useSelector((state) => state.jobs);
@@ -50,7 +50,19 @@ export default function CUpdateJob() {
       const [loanBalance,setLoanBalance] = useState(job.walletBalance)
       const [walletBalance,setWalletBalance] = useState(job.loanBalance)
 
-      
+      const { userDetails, error,message, isLoading } = useSelector((state) => state.loggedIn);
+    
+    useEffect(() => {
+      console.log(userDetails)
+     if(userDetails === '' ){
+       
+        navigate('/login')
+        
+      }
+       
+       
+    }, [])
+
 
 
     useEffect(() => {
@@ -76,7 +88,7 @@ export default function CUpdateJob() {
         const id  = params.id
         const job = {id, amountAccrued, groups, walletBalance, loanBalance};
         console.log('JOB: ', job);
-        dispatch(updateJob(job, setLoading, history));
+        dispatch(updateJob(job, setLoading, navigate));
     }
 
   return (

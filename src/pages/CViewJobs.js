@@ -18,6 +18,21 @@ export default function CViewJob() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const params = useParams();
+
+
+    const { userDetails, error,message, isLoading } = useSelector((state) => state.loggedIn);
+    
+    useEffect(() => {
+      console.log(userDetails)
+     if(userDetails === '' ){
+       
+        navigate('/login')
+        
+      }
+       
+       
+    }, [])
+
    
    
     const { job } = useSelector((state) => state.jobs);

@@ -181,10 +181,10 @@ export default function CJobList({jobs}) {
           <>
        
 
-          <div style={{float: 'right', border: '0px solid red'}}>
+         {/* <div style={{float: 'right', border: '0px solid red'}}>
         <Button
             type="submit"
-            // fullWidth
+           
             variant="contained"
             style={{
               backgroundColor: "#60A1EC",
@@ -192,7 +192,7 @@ export default function CJobList({jobs}) {
               fontSize: "15px",
             }}
             sx={{ mt: 7, mb: 2 }}
-             //onClick={() => {navigate('/company/add-jobs')}}
+             
             onClick={() => {window.location.href = "/company/add-jobs"}}
           >
             ADD USER
@@ -200,7 +200,7 @@ export default function CJobList({jobs}) {
             
 
 
-      </div>
+      </div>*/}
       
       <br/>
       <p style={{fontSize: '26px', marginLeft: '5px', color: 'black'}}><b>ALL USERS</b></p><br/>

@@ -183,10 +183,10 @@ export default function CoolerList({jobs}) {
           <>
          
 
-          <div style={{float: 'right', border: '0px solid red'}}>
+         {/* <div style={{float: 'right', border: '0px solid red'}}>
         <Button
             type="submit"
-            // fullWidth
+            
             variant="contained"
             style={{
               backgroundColor: "#60A1EC",
@@ -194,15 +194,15 @@ export default function CoolerList({jobs}) {
               fontSize: "15px",
             }}
             sx={{ mt: 7, mb: 2 }}
-             //onClick={() => {navigate('/company/add-jobs')}}
+             
             onClick={() => {window.location.href = "/company/add-jobs"}}
           >
             ADD COOLER
           </Button>
             
-          {console.log("hi missy coolers display")}
+         
 
-      </div>
+      </div>*/}
       
       <br/>
       <p style={{fontSize: '26px', marginLeft: '5px', color: 'black'}}><b>ALL COOLERS</b></p><br/>
