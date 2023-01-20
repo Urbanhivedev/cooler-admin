@@ -18,7 +18,7 @@ const theme = createTheme();
 
 export default function UpdateCooler() {
     const dispatch = useDispatch();
-    const history = useNavigate();
+    const navigate = useNavigate();
     const params = useParams();
     const locationV = useLocation();
     const { cooler } = useSelector((state) => state.coolers);
@@ -46,9 +46,9 @@ export default function UpdateCooler() {
  // };
   
       const [amount,setAmount] = useState(cooler.amount)
-      const [noOfSavers,setNoOfSavers] = useState(cooler.NoOfSavers)
-      const [status,setStatus] = useState(cooler.status)
-      const [admins,setAdmins] = useState(cooler.admins)
+      const [noOfSavers,setNoOfSavers] = useState(cooler.noOfSavers)
+      
+      const [admin,setAdmin] = useState(cooler.admin)
       const [members,setMembers] = useState(cooler.members)
 
       
@@ -56,7 +56,7 @@ export default function UpdateCooler() {
 
     useEffect(() => {
       dispatch(getSingleCooler(params.id));  
-      console.log("cooler: ", cooler);
+     
      }, [])
       
 
@@ -71,22 +71,30 @@ export default function UpdateCooler() {
       marginTop: '10px'
     };
 
-    const updateJobFxn = (e) => {
-        e.preventDefault();
-        setLoading(true);
+    const updateCoolerFxn = (e) => {
+        e.preventDefault()
+       
         const id  = params.id
-        const cooler = {id, amount, noOfSavers, status, admins,members};
-        console.log('cooler: ', cooler);
-        dispatch(updateCooler(cooler, setLoading, history));
+        const cooler = {id, amount, noOfSavers, admin,members}
+        console.log(cooler)
+        dispatch(updateCooler(cooler, setLoading, navigate))
+       
+       
+        setLoading(true)
+        
+       
+        
+
+       
     }
 
   return (
       
          <Container maxWidth="lg" sx={{ mt: 3, mb: 4 }}>
-          {cooler != undefined && cooler != null ?
+          {cooler !== undefined && cooler !== null ?
           
           <>
-          <form component="form" onSubmit={updateJobFxn}>
+          <form component="form" onSubmit={(e)=>{updateCoolerFxn(e)}}>
           <Grid container spacing={2}>
             <Grid
               container
@@ -157,26 +165,10 @@ export default function UpdateCooler() {
             </Grid>
             <Grid item xs={12} md={8} lg={2} style={{height: '40%'}}>
             </Grid>
-            <Grid item xs={4} md={6} lg={3} style={{border: '0px solid red', height: '50%', marginTop: '14px'}}>
-             <h4>STATUS </h4>  
-            </Grid>
-             <Grid item xs={12} md={8} lg={6} style={{height: '40%'}}>
-             <TextField 
-             fullWidth 
-             label="Enter New Status"
             
-             id="fullWidth"
-             value={status} 
-             name="status"
-             onChange={(e)=>setStatus(e.target.value)}
-             error={status === ""}
-             />
-            </Grid>
-            <Grid item xs={12} md={8} lg={2} style={{height: '40%'}}>   
-            </Grid>
 
             <Grid item xs={4} md={6} lg={3} style={{border: '0px solid red', height: '50%', marginTop: '14px'}}>
-             <h4>ADMINS </h4>
+             <h4>ADMIN </h4>
             </Grid>
              <Grid item xs={12} md={8} lg={6} style={{height: '40%'}}>
              <TextField 
@@ -187,10 +179,10 @@ export default function UpdateCooler() {
               
              label="Change Admins" 
              id="fullWidth"
-             value={admins}
-             name="Admins"
-             onChange={(e)=>setAdmins(e.target.value)}
-             error={admins === ""}
+             value={admin}
+             name="Admin"
+             onChange={(e)=>setAdmin(e.target.value)}
+             error={admin === ""}
              />
             </Grid>
             <Grid item xs={12} md={8} lg={2} style={{height: '40%'}}>
