@@ -92,9 +92,11 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor:"#60A1EC",
     color: theme.palette.common.white,
+    width:150
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
+    width:150
   },
 }));
 
@@ -206,7 +208,7 @@ export default function CJobList({jobs}) {
       <p style={{fontSize: '26px', marginLeft: '5px', color: 'black'}}><b>ALL USERS</b></p><br/>
       <hr />
       <TableContainer component={Paper}>
-        <Table sx={{ maxWidth: 1300 }} aria-label="custom pagination table">
+        <Table sx={{ maxWidth: 1500,tableLayout:"fixed" }} aria-label="custom pagination table">
           <TableHead>
             <TableRow>
               <StyledTableCell>Name</StyledTableCell>
