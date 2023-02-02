@@ -52,17 +52,19 @@ function NavItem({ item }) {
       sx={{
         width:"100%",
         borderRadius:"10px",
+        marginBottom:"-24px",
         '&.active': {
           color: 'black',
           // bgcolor: '#66000000',
           backgroundColor: 'black',
           fontWeight: 'fontWeightBold',
           borderRadius:"10px",
+         
 
         },
       }}
     >
-      {iconLabel != 'msg' && iconLabel != 'settings' && <StyledNavItemIcon sx={{color: '#FFFFFF', fontSize: '20px'}}>{icon && icon}</StyledNavItemIcon>}
+      {iconLabel !== 'msg' && iconLabel !== 'settings' && <StyledNavItemIcon sx={{color: '#FFFFFF', fontSize: '20px'}}>{icon && icon}</StyledNavItemIcon>}
       
       {iconLabel === 'msg' && <StyledNavItemIcon sx={{color: '#FFFFFF', fontSize: '20px'}}><MessageIcon /></StyledNavItemIcon>}
       

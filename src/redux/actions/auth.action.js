@@ -79,8 +79,8 @@ export const uploadImage = (user, file, history, setLoading) => async (dispatch)
 export const logout = (history) => async (dispatch) => {
   fb.auth().signOut().then(() => {
     console.log('logout successful!');
-    //dispatch(clearUser());
-    history.push('/company/signin');
+   // dispatch(clearUser());
+   history.push('/login');
   }).catch((error) => {
     // An error happened.
     console.log('logout failed response: ', error.message);
