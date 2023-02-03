@@ -11,6 +11,7 @@ import CViewJob from './pages/CViewJobs';
 import CUpdateJob from './pages/CUpdateJob';
 import ViewCooler from './pages/ViewCoolers';
 import UpdateCooler from './pages/UpdateCooler';
+import TransferCooler from './pages/TransferCooler';
 import ViewAllCoolers from './pages/ViewAllCoolers';
 import CoolersPage from './pages/CoolersPage';
 import MyCoolersPage from './pages/MyCoolersPage';
@@ -48,6 +49,7 @@ export default function Router() {
         { path: 'create-cooler', element: <ViewAllCoolers /> },
         { path: 'view-coolers/:id', element: <ViewCooler /> },
         { path: 'update-coolers/:id', element: <UpdateCooler /> },
+        { path: 'transfer-coolers/:id', element: <TransferCooler /> },
       ],
     },
     

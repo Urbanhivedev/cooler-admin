@@ -17,6 +17,7 @@ import Menu, { MenuProps } from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import ArchiveIcon from '@mui/icons-material/Archive';
+import PersonIcon from '@mui/icons-material/Person';
 import FileCopyIcon from '@mui/icons-material/FileCopy';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import EditIcon from '@mui/icons-material/Edit';
@@ -30,6 +31,7 @@ export default function ViewCooler() {
    
    
     const { cooler } = useSelector((state) => state.coolers);
+    const [amount,setAmount] = useState(cooler.amount)
 
     useEffect(() => {
       dispatch(getSingleCooler(params.id));  
@@ -169,83 +171,14 @@ export default function ViewCooler() {
            
               
             
-             <Grid item xs={4} md={6} lg={3} style={{border: '0px solid red', height: '50%', marginTop: '14px',marginLeft: '196px'}}>
-             <h3>COOLER NAME</h3>
             
-            </Grid>
-            
-             <Grid item xs={12} md={8} lg={6} style={{height: '40%', marginTop: '14px',}}>
-             <p style={{color: 'black'}}>${cooler.amount}</p>
-             <Divider/>
-            </Grid>
-            
-             
-            <Grid item xs={12} md={8} lg={2} style={{height: '40%'}}>
-             
-             </Grid>
 
-             
-             <Grid item xs={4} md={6} lg={3} style={{border: '0px solid red', height: '50%',  marginTop: '1px'}}>
-              <h3>REGISTERED ON</h3>
-             </Grid>
-             
-              <Grid item xs={12} md={8} lg={6} style={{height: '40%'}}>
-              <p style={{color: 'black'}}>{cooler.startDate}{/*cooler.accountCreated && new Date(cooler.accountCreated.seconds*1000).toLocaleDateString()*/}
-                 </p>
-                 <Divider/>
-             </Grid>
-
-          
-
-            <Grid item xs={12} md={8} lg={2} style={{height: '40%'}}>
-             
+            <Grid item xs={12} md={8} lg={2} style={{height: '40%',marginTop: '100px'}}>   
             </Grid>
-            <Grid item xs={4} md={6} lg={3} style={{border: '0px solid red', height: '50%',  marginTop: '1px'}}>
-             <h3>ADMIN EMAIL</h3>
-            </Grid>
-             <Grid item xs={12} md={8} lg={6} style={{height: '40%'}}>
-             <p style={{color: 'black'}}>{cooler.admin}
-                </p>
-                <Divider/>
-            </Grid>
-            <Grid item xs={12} md={8} lg={2} style={{height: '40%'}}>
-            </Grid>
-
-            <Grid item xs={4} md={6} lg={3} style={{border: '0px solid red', height: '50%',  marginTop: '1px'}}>
-             <h3>NO. SAVERS</h3>
-            </Grid>
-            <Grid item xs={12} md={8} lg={6} style={{height: '40%',  marginTop: '1px'}}>
-             <p style={{color: 'black'}}>{cooler.noOfSavers}</p>
-             <Divider/>
-            </Grid>
-            <Grid item xs={12} md={8} lg={2} style={{height: '40%'}}>   
-            </Grid>
-            <Grid item xs={4} md={6} lg={3} style={{border: '0px solid red', height: '50%',  marginTop: '1px'}}>
-             <h3>FEE</h3>
-            </Grid>
-            <Grid item xs={12} md={8} lg={6} style={{height: '40%',  marginTop: '1px'}}>
-              
-             <p style={{color: 'black'}}>{cooler.members}</p>
-             <Divider/>
-            </Grid>
-            
-            <Grid item xs={12} md={8} lg={2} style={{height: '40%'}}>   
-            </Grid>
-            <Grid item xs={4} md={6} lg={3} style={{border: '0px solid red', height: '50%',  marginTop: '1px'}}>
-             <h3>BALANCE</h3>
-            </Grid>
-            <Grid item xs={12} md={8} lg={6} style={{height: '40%',  marginTop: '1px'}}>
-              
-             <p style={{color: 'black'}}>{cooler.members}</p>
-             <Divider/>
-            </Grid>
-
-            <Grid item xs={12} md={8} lg={2} style={{height: '40%'}}>   
-            </Grid>
-            <Grid item xs={4} md={6} lg={3} style={{border: '0px solid red', height: '50%',  marginTop: '1px', }}>
+            <Grid item xs={4} md={6} lg={3} style={{border: '0px solid red', height: '50%',  marginTop: '100px', }}>
              <h3>MEMBERS</h3>
             </Grid>
-            <Grid item xs={12} md={8} lg={6} style={{height: '40%',  marginTop:'1px' }}>
+            <Grid item xs={12} md={8} lg={6} style={{height: '40%',  marginTop:'120px' }}>
               
             <Button
               id="demo-customized-button"
@@ -270,21 +203,21 @@ export default function ViewCooler() {
         onClose={handleClose}
       >
         <MenuItem onClick={handleClose} disableRipple>
-          <EditIcon />
-          Edit
+          <PersonIcon />
+          Juston Mraz
         </MenuItem>
         <MenuItem onClick={handleClose} disableRipple>
-          <FileCopyIcon />
-          Duplicate
+          <PersonIcon />
+          Kentaro Miura
         </MenuItem>
         <Divider sx={{ my: 0.5 }} />
         <MenuItem onClick={handleClose} disableRipple>
-          <ArchiveIcon />
-          Archive
+          <PersonIcon />
+          Smith John
         </MenuItem>
         <MenuItem onClick={handleClose} disableRipple>
-          <MoreHorizIcon />
-          More
+          <PersonIcon />
+          Tom Polo
         </MenuItem>
       </StyledMenu>
 
@@ -292,28 +225,28 @@ export default function ViewCooler() {
              
             </Grid>
 
-           
+            <Grid item xs={4} md={6} lg={3} style={{border: '0px solid red', height: '50%', marginTop: '38px',marginLeft: '180px',}}>
+             <h3>AMOUNT</h3>
+            </Grid>
+             <Grid item xs={12} md={8} lg={6} style={{height: '40%',  marginTop: '40px'}}>
+             <TextField fullWidth
+              label="Edit Minimum Amount Required"
+               id="fullWidth"
+              
+               value={amount}
+               name="amount "
+               onChange={(e)=>setAmount(e.target.value)}
+               error={amount === ""}
+               />
+            </Grid>
+            <Grid item xs={12} md={8} lg={2} style={{height: '40%'}}>
+              
+            </Grid>
 
           </Grid>
                  <br/>
            <Box sx={{ ml:"350px"}}>
-                 <Button
-                    type="submit"
-                    // fullWidth
-                    variant="contained"
-                    style={{
-                     
-                      color: "white",
-                    //   width: "30%",
-                      fontSize: "15px",
-                    }}
-                    sx={{ mt: 3, mb: 2 ,ml:3 ,p:2,backgroundColor:"#60A1EC" }}
-                    onClick={() => {
-                      navigate(`/dashboard/update-coolers/${params.id}`);
-                    }}
-                  >
-                    UPDATE
-                  </Button>
+                
 
                   <Button
                     type="submit"

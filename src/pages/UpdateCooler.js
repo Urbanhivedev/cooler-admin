@@ -133,7 +133,7 @@ export default function UpdateCooler() {
     </Paper>
     </Grid>         
              <Grid item xs={4} md={6} lg={3} style={{border: '0px solid red', height: '50%', marginTop: '14px'}}>
-             <h4>COOLER NUMBER</h4>
+             <h3>COOLER NUMBER</h3>
             </Grid>
              <Grid item xs={12} md={8} lg={6} style={{height: '40%'}}>
              <TextField fullWidth
@@ -150,7 +150,7 @@ export default function UpdateCooler() {
               
             </Grid>
             <Grid item xs={4} md={6} lg={3} style={{border: '0px solid red', height: '50%', marginTop: '14px'}}>
-             <h4>CREATED </h4>
+             <h3>CREATED </h3>
             </Grid>
              <Grid item xs={12} md={8} lg={6} style={{height: '40%'}}>
              <TextField fullWidth
@@ -168,7 +168,7 @@ export default function UpdateCooler() {
             
 
             <Grid item xs={4} md={6} lg={3} style={{border: '0px solid red', height: '50%', marginTop: '14px'}}>
-             <h4>COOLER NAME </h4>
+             <h3>COOLER NAME </h3>
             </Grid>
              <Grid item xs={12} md={8} lg={6} style={{height: '40%'}}>
              <TextField 
@@ -190,7 +190,7 @@ export default function UpdateCooler() {
             </Grid>
 
             <Grid item xs={4} md={6} lg={3} style={{border: '0px solid red', height: '50%', marginTop: '14px'}}>
-             <h4>ADMIN EMAIL </h4>
+             <h3>ADMIN EMAIL </h3>
             </Grid>
              <Grid item xs={12} md={8} lg={6} style={{height: '40%'}}>
              <TextField 
