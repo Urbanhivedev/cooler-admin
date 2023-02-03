@@ -189,7 +189,7 @@ export default function ViewCooler() {
               disableElevation
               onClick={handleClick}
               endIcon={<KeyboardArrowDownIcon />}
-              style={{width: '200px',backgroundColor:"#60A1EC" }}
+              style={{width: '400px',padding:"10px",backgroundColor:"#60A1EC", fontSize:"22px" }}
            >
             Select
            </Button>
@@ -229,7 +229,7 @@ export default function ViewCooler() {
              <h3>AMOUNT</h3>
             </Grid>
              <Grid item xs={12} md={8} lg={6} style={{height: '40%',  marginTop: '40px'}}>
-             <TextField fullWidth
+             <TextField style={{width:"400px"}}
               label="Edit Minimum Amount Required"
                id="fullWidth"
               
