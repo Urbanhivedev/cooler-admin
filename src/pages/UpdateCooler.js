@@ -46,9 +46,9 @@ export default function UpdateCooler() {
  // };
   
       const [amount,setAmount] = useState(cooler.amount)
-      const [noOfSavers,setNoOfSavers] = useState(cooler.noOfSavers)
+      const [noOfSavers,setNoOfSavers] = useState(cooler.startDate)
       
-      const [admin,setAdmin] = useState(cooler.admin)
+      const [admin,setAdmin] = useState(cooler.groupName)
       const [members,setMembers] = useState(cooler.members)
 
       
@@ -116,7 +116,7 @@ export default function UpdateCooler() {
       <Grid container spacing={2}>
         <Grid item>
           <ButtonBase sx={{ width: 148, height: 148 , backgroundColor:"black"}}>
-            <img alt="Job-Logo"  src={JobLogo} />
+            <img alt="Job-Logo"  src={cooler.imageUrl} />
           </ButtonBase>
         </Grid>
         <Grid item xs={12} sm container>
@@ -133,7 +133,7 @@ export default function UpdateCooler() {
     </Paper>
     </Grid>         
              <Grid item xs={4} md={6} lg={3} style={{border: '0px solid red', height: '50%', marginTop: '14px'}}>
-             <h4>TOTAL AMOUNT SAVED ($)</h4>
+             <h4>COOLER NUMBER</h4>
             </Grid>
              <Grid item xs={12} md={8} lg={6} style={{height: '40%'}}>
              <TextField fullWidth
@@ -150,7 +150,7 @@ export default function UpdateCooler() {
               
             </Grid>
             <Grid item xs={4} md={6} lg={3} style={{border: '0px solid red', height: '50%', marginTop: '14px'}}>
-             <h4>NUMBER OF SAVERS</h4>
+             <h4>CREATED </h4>
             </Grid>
              <Grid item xs={12} md={8} lg={6} style={{height: '40%'}}>
              <TextField fullWidth
@@ -168,7 +168,7 @@ export default function UpdateCooler() {
             
 
             <Grid item xs={4} md={6} lg={3} style={{border: '0px solid red', height: '50%', marginTop: '14px'}}>
-             <h4>ADMIN </h4>
+             <h4>COOLER NAME </h4>
             </Grid>
              <Grid item xs={12} md={8} lg={6} style={{height: '40%'}}>
              <TextField 
@@ -190,7 +190,7 @@ export default function UpdateCooler() {
             </Grid>
 
             <Grid item xs={4} md={6} lg={3} style={{border: '0px solid red', height: '50%', marginTop: '14px'}}>
-             <h4>MEMBERS </h4>
+             <h4>ADMIN EMAIL </h4>
             </Grid>
              <Grid item xs={12} md={8} lg={6} style={{height: '40%'}}>
              <TextField 
@@ -218,10 +218,11 @@ export default function UpdateCooler() {
                     // fullWidth
                     variant="contained"
                     style={{
-                      backgroundColor: "black",
+                      backgroundColor:"#60A1EC" ,
                       color: "white",
                     //   width: "30%",
                       fontSize: "15px",
+                      padding:"20px",
                     }}
                     sx={{ mt: 7, mb: 2 }}
                     // onClick={addJobFxn}

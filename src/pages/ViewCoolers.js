@@ -302,12 +302,12 @@ export default function ViewCooler() {
                     // fullWidth
                     variant="contained"
                     style={{
-                      backgroundColor: "black",
+                     
                       color: "white",
                     //   width: "30%",
                       fontSize: "15px",
                     }}
-                    sx={{ mt: 3, mb: 2 ,ml:3 ,p:2}}
+                    sx={{ mt: 3, mb: 2 ,ml:3 ,p:2,backgroundColor:"#60A1EC" }}
                     onClick={() => {
                       navigate(`/dashboard/update-coolers/${params.id}`);
                     }}
@@ -320,12 +320,12 @@ export default function ViewCooler() {
                     // fullWidth/dashboard/settings
                     variant="contained"
                     style={{
-                      backgroundColor: "black",
+                      
                       color: "white",
                     //   width: "30%",
                       fontSize: "15px",
                     }}
-                    sx={{ mt: 3, mb: 2 , ml:3,p:2}}
+                    sx={{ mt: 3, mb: 2 , ml:3,p:2,backgroundColor:"#60A1EC" }}
                     onClick={() => {
                       navigate(`/dashboard/update-coolers/${params.id}`);
                     }}
