@@ -109,7 +109,7 @@ export default function AccountPopover() {
 
         <Divider sx={{ borderStyle: 'dashed' }} />
 
-        <MenuItem onClick={() => dispatch(logout(navigate))} sx={{ m: 1 }} >
+        <MenuItem onClick={() => dispatch(logout(navigate))} sx={{ m: 3 }} >
           Logout
         </MenuItem>
       </Popover>

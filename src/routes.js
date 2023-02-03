@@ -3,6 +3,7 @@ import { Navigate, useRoutes } from 'react-router-dom';
 import DashboardLayout from './layouts/dashboard';
 import SimpleLayout from './layouts/simple';
 
+import LoginPage from './pages/LoginPage';
 import SigninPage from './pages/SigninPage';
 import Page404 from './pages/Page404';
 import HomePage from './pages/HomePage';
@@ -26,7 +27,7 @@ export default function Router() {
     {
       path: '/login',
       
-      element: <SigninPage />,
+      element: <LoginPage />,
     },
     
     {

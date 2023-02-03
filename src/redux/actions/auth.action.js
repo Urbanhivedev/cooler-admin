@@ -1,5 +1,6 @@
 import { db, fb, auth, storage } from '../../config/firebase';
 import {  loginFailed, loginSuccess} from '../reducers/loggedIn.slice';
+import { clearUser,  signupFailed, storeUserData } from '../reducers/auth.slice';
 import { v4 as uuidv4 } from 'uuid';
 
   export const signin = (user, navigate) => async (dispatch) => {
@@ -76,11 +77,11 @@ export const uploadImage = (user, file, history, setLoading) => async (dispatch)
   );
 }
 
-export const logout = (history) => async (dispatch) => {
+export const logout = (navigate) => async (dispatch) => {
   fb.auth().signOut().then(() => {
     console.log('logout successful!');
-   // dispatch(clearUser());
-   history.push('/login');
+    dispatch(clearUser());
+   navigate('/login');
   }).catch((error) => {
     // An error happened.
     console.log('logout failed response: ', error.message);
