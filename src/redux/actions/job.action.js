@@ -3,19 +3,19 @@ import { fetchJobs, fetchSingleJob } from "../reducers/job.slice";
 
 
 export const getJobs = (uid) => async (dispatch) => {
-    db.collection('users').get().then((snapshot) => {
+    db.collection('employees').get().then((snapshot) => {
         const jobs = snapshot.docs.map((doc) => ({id: doc.id, ...doc.data() }));
         // console.log('Jobs: ', jobs);
         dispatch(fetchJobs(jobs));
 }).catch((error) => {
         var errorMessage = error.message;
-        console.log('Error fetching users', errorMessage);
+        console.log('Error fetching employees', errorMessage);
 });
 
 };
 
 export const getSingleJob = (id) => async (dispatch) => {
-    var job = db.collection("users").doc(id);
+    var job = db.collection("employees").doc(id);
 
     job.get().then((doc) => {
     if (doc.exists) {
@@ -31,7 +31,7 @@ export const getSingleJob = (id) => async (dispatch) => {
 };
 
 export const addJob = (job, setLoading, clearState) => async (dispatch) => {
-    db.collection("users").add({
+    db.collection("employees").add({
         title: job.title,
         description: job.description,
         location: job.location,
@@ -52,16 +52,16 @@ export const addJob = (job, setLoading, clearState) => async (dispatch) => {
 };
 export const updateJob = (job, setLoading, history) => async (dispatch) => {
 
-    var jobRef = db.collection("users").doc(job.id);
+    var jobRef = db.collection("employees").doc(job.id);
     const jobData = jobRef.update({
-        amountAccrued: job.amountAccrued,
-        groups: job.groups,
+        accruedBalance: job.amountAccrued,
+        coolers: job.coolers,
         walletBalance: job.walletBalance,
-        loanBalance: job.loanBalance
+        job: job.firstName
     })
     .then(() => {
         setLoading(false);
-        alert('users have been updated.✔');
+        alert('employees have been updated.✔');
         history('/dashboard/home');
         
     })

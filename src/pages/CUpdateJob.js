@@ -32,7 +32,7 @@ export default function CUpdateJob() {
    //   };
 //
    // const [
-   //     { amountAccrued,groups, walletBalance , loanBalance },
+   //     { amountAccrued,coolers, walletBalance , loanBalance },
    //     setState
    //   ] = useState(initialState);
 
@@ -46,9 +46,11 @@ export default function CUpdateJob() {
  // };
   
       const [amountAccrued,setAmountAccrued] = useState(job.amountAccrued)
-      const [groups,setGroups] = useState(job.groups)
+      const [coolers,setCoolers] = useState(job.coolers)
+      const [name,setName] = useState(job.firstName)
       const [loanBalance,setLoanBalance] = useState(job.walletBalance)
       const [walletBalance,setWalletBalance] = useState(job.loanBalance)
+
 
       const { userDetails, error,message, isLoading } = useSelector((state) => state.loggedIn);
     
@@ -86,7 +88,7 @@ export default function CUpdateJob() {
         e.preventDefault();
         setLoading(true);
         const id  = params.id
-        const job = {id, amountAccrued, groups, walletBalance, loanBalance};
+        const job = {id, amountAccrued, coolers, walletBalance, loanBalance};
         console.log('JOB: ', job);
         dispatch(updateJob(job, setLoading, navigate));
     }
@@ -119,7 +121,7 @@ export default function CUpdateJob() {
       <Grid container spacing={2}>
         <Grid item>
           <ButtonBase sx={{ width: 148, height: 148 , backgroundColor:"black"}}>
-            <img alt="Job-Logo"  src={JobLogo} />
+            <img alt="Job-Logo"  src={job.imageUrl} />
           </ButtonBase>
         </Grid>
         <Grid item xs={12} sm container>
@@ -136,37 +138,37 @@ export default function CUpdateJob() {
     </Paper>
     </Grid>         
              <Grid item xs={4} md={6} lg={3} style={{border: '0px solid red', height: '50%', marginTop: '14px'}}>
-             <h4>AMOUNT ACCRUED ($)</h4>
+             <h4>NAME</h4>
             </Grid>
              <Grid item xs={12} md={8} lg={6} style={{height: '40%'}}>
              <TextField fullWidth
-              label="Enter Amount Accrued"
+              label="Update Name"
                id="fullWidth"
               
-               value={amountAccrued}
+               value={name}
                name="amount accrued"
-               onChange={(e)=>setAmountAccrued(e.target.value)}
-               error={amountAccrued === ""}
+               onChange={(e)=>setName(e.target.value)}
+               error={name === ""}
                />
             </Grid>
             <Grid item xs={12} md={8} lg={2} style={{height: '40%'}}>
               
             </Grid>
             <Grid item xs={4} md={6} lg={3} style={{border: '0px solid red', height: '50%', marginTop: '14px'}}>
-             <h4>GROUPS</h4>
+             <h4>COOLERS</h4>
             </Grid>
              <Grid item xs={12} md={8} lg={6} style={{height: '40%'}}>
              <TextField fullWidth
-              label="Ammend Groups"
+              label="Ammend coolers"
               id="fullWidth" 
               
               multiline
               rows={6}
               maxRows={12}
-              value={groups}
-              name="groups"
-              onChange={(e)=>setGroups(e.target.value)}
-              error={groups === ""}
+              value={coolers}
+              name="coolers"
+              onChange={(e)=>setCoolers(e.target.value)}
+              error={coolers === ""}
               />
             </Grid>
             <Grid item xs={12} md={8} lg={2} style={{height: '40%'}}>
@@ -184,6 +186,24 @@ export default function CUpdateJob() {
              name="wallet Balace"
              onChange={(e)=>setWalletBalance(e.target.value)}
              error={walletBalance === ""}
+             />
+            </Grid>
+            <Grid item xs={12} md={8} lg={2} style={{height: '40%'}}>   
+            </Grid>
+
+            <Grid item xs={4} md={6} lg={3} style={{border: '0px solid red', height: '50%', marginTop: '14px'}}>
+             <h4>ACCRUED BALANCE ($)</h4>
+            </Grid>
+             <Grid item xs={12} md={8} lg={6} style={{height: '40%'}}>
+             <TextField 
+             fullWidth 
+             label="Enter New Accrued Balance"
+            
+             id="fullWidth"
+             value={amountAccrued} 
+             name="wallet Balace"
+             onChange={(e)=>setAmountAccrued(e.target.value)}
+             error={setAmountAccrued === ""}
              />
             </Grid>
             <Grid item xs={12} md={8} lg={2} style={{height: '40%'}}>   
@@ -215,7 +235,8 @@ export default function CUpdateJob() {
                     // fullWidth
                     variant="contained"
                     style={{
-                      backgroundColor: "black",
+                      padding:"20px",
+                      backgroundColor:"#60A1EC",
                       color: "white",
                     //   width: "30%",
                       fontSize: "15px",

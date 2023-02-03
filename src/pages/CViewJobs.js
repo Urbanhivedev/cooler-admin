@@ -1,15 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Container from '@mui/material/Container';
-import {Box, Grid, TextField, Paper, Button, Typography, ButtonBase} from '@mui/material';
+import {Box, Grid, TextField, Paper, Button, Typography, ButtonBase,Divider} from '@mui/material';
 //import Layout from "../components/Layout/layout";
 import CssBaseline from '@mui/material/CssBaseline';
 import { NavLink, useNavigate, useLocation,useParams} from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { styled } from '@mui/material/styles';
+import { styled,alpha } from '@mui/material/styles';
 import JobLogo from '../assets/images/Cooler.png';
 import { getSingleJob } from "../redux/actions/job.action";
 import Skeleton from '@mui/material/Skeleton';
+
+import Menu, { MenuProps } from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import PersonIcon from '@mui/icons-material/Person';
+import FileCopyIcon from '@mui/icons-material/FileCopy';
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import EditIcon from '@mui/icons-material/Edit';
 
 
 const theme = createTheme();
@@ -68,6 +76,67 @@ export default function CViewJob() {
         maxWidth: '100%',
         maxHeight: '100%',
       });
+
+
+
+      const StyledMenu = styled((props) => (
+        <Menu
+          elevation={0}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'right',
+          }}
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          {...props}
+        />
+      ))(({ theme }) => ({
+        '& .MuiPaper-root': {
+          borderRadius: 6,
+          marginTop: theme.spacing(1),
+          minWidth: 180,
+          color:
+            theme.palette.mode === 'light' ? 'rgb(55, 65, 81)' : theme.palette.grey[300],
+          boxShadow:
+            'rgb(255, 255, 255) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px',
+          '& .MuiMenu-list': {
+            padding: '4px 0',
+          },
+          '& .MuiMenuItem-root': {
+            '& .MuiSvgIcon-root': {
+              fontSize: 18,
+              color: theme.palette.text.secondary,
+              marginRight: theme.spacing(1.5),
+            },
+            '&:active': {
+              backgroundColor: alpha(
+                theme.palette.primary.main,
+                theme.palette.action.selectedOpacity,
+              ),
+            },
+          },
+        },
+      }));
+      
+      
+        const [anchorEl, setAnchorEl] = useState(null);
+        const open = Boolean(anchorEl);
+        const handleClick = (event) => {
+          setAnchorEl(event.currentTarget);
+        };
+        const handleClose = () => {
+          setAnchorEl(null);
+        };
+       
+
+
+
+
+
+
+
   return (
       
          <Container maxWidth="lg" sx={{ mt: 3, mb: 4 }}>
@@ -95,7 +164,7 @@ export default function CViewJob() {
       <Grid container spacing={2}>
         <Grid item>
           <ButtonBase sx={{ width: 148, height: 148 , backgroundColor:"black"}}>
-            <img alt="Job-Logo" src={JobLogo} />
+            <img alt="Job-Logo" src={job.imageUrl} />
           </ButtonBase>
         </Grid>
         <Grid item xs={12} sm container>
@@ -103,7 +172,7 @@ export default function CViewJob() {
             <br/><br/>
             <Grid item xs>
               <p style={myHeader}>
-                 {(job.firstName + " " + job.lastName).toUpperCase()}
+                 {job.firstName + " " + job.lastName}
               </p>
             </Grid>
           </Grid>
@@ -112,90 +181,156 @@ export default function CViewJob() {
     </Paper>
     </Grid>  
            
-             <Grid item xs={4} md={6} lg={3} style={{border: '0px solid red', height: '50%', marginTop: '14px'}}>
-             <h4></h4>
-            </Grid>
-            <Grid item xs={12} md={8} lg={6} style={{height: '40%', marginTop: '14px'}}>
-             <img src={job.imageUrl} style={{borderRadius: '15px', height:'250px'}}/>
-            </Grid>
-            <Grid item xs={12} md={8} lg={2} style={{height: '40%'}}>
               
+            
+             <Grid item xs={4} md={6} lg={3} style={{border: '0px solid red', height: '50%', marginTop: '14px',marginLeft: '196px'}}>
+             <h3>NAME</h3>
+            
             </Grid>
-
-
-             <Grid item xs={4} md={6} lg={3} style={{border: '0px solid red', height: '50%', marginTop: '14px'}}>
-             <h4>EMAIL</h4>
+            
+             <Grid item xs={12} md={8} lg={6} style={{height: '40%', marginTop: '14px',}}>
+             <p style={{color: 'black'}}>{job.firstName + " " + job.lastName}</p>
+             <Divider/>
             </Grid>
-             <Grid item xs={12} md={8} lg={6} style={{height: '40%', marginTop: '14px'}}>
-             <p style={{color: 'black'}}>{job.email}</p>
-            </Grid>
+            
              
             <Grid item xs={12} md={8} lg={2} style={{height: '40%'}}>
              
              </Grid>
-             <Grid item xs={4} md={6} lg={3} style={{border: '0px solid red', height: '50%', marginTop: '14px'}}>
-              <h4>REGISTERED ON</h4>
+
+             
+             <Grid item xs={4} md={6} lg={3} style={{border: '0px solid red', height: '50%',  marginTop: '1px'}}>
+              <h3>REGISTERED</h3>
              </Grid>
+             
               <Grid item xs={12} md={8} lg={6} style={{height: '40%'}}>
-              <p style={{color: 'black'}}>{job.accountCreated && (new Date(job.accountCreated.seconds*1000)).toLocaleDateString()}
+              <p style={{color: 'black'}}>{job.accountCreated && new Date(job.accountCreated.seconds*1000).toLocaleDateString()}
                  </p>
+                 <Divider/>
              </Grid>
 
-
+          
 
             <Grid item xs={12} md={8} lg={2} style={{height: '40%'}}>
              
             </Grid>
-            <Grid item xs={4} md={6} lg={3} style={{border: '0px solid red', height: '50%', marginTop: '14px'}}>
-             <h4>WALLET BALANCE</h4>
+            <Grid item xs={4} md={6} lg={3} style={{border: '0px solid red', height: '50%',  marginTop: '1px'}}>
+             <h3>EMPLOYER</h3>
             </Grid>
              <Grid item xs={12} md={8} lg={6} style={{height: '40%'}}>
-             <p style={{color: 'black'}}>${job.walletBalance}
+             <p style={{color: 'black'}}>{job.employeerNumber}
                 </p>
+                <Divider/>
             </Grid>
             <Grid item xs={12} md={8} lg={2} style={{height: '40%'}}>
             </Grid>
-           {/* <Grid item xs={4} md={6} lg={3} style={{border: '0px solid red', height: '50%', marginTop: '14px'}}>
-             <h4>LOAN BALANCE</h4>
+
+            <Grid item xs={4} md={6} lg={3} style={{border: '0px solid red', height: '50%',  marginTop: '1px'}}>
+             <h3>EMAIL</h3>
             </Grid>
-            <Grid item xs={12} md={8} lg={6} style={{height: '40%', marginTop: '14px'}}>
-             <p style={{color: 'black'}}>${job.loanBalance}</p>
+            <Grid item xs={12} md={8} lg={6} style={{height: '40%',  marginTop: '1px'}}>
+             <p style={{color: 'black'}}>{job.email}</p>
+             <Divider/>
             </Grid>
             <Grid item xs={12} md={8} lg={2} style={{height: '40%'}}>   
-            </Grid>*/}
-
-            <Grid item xs={4} md={6} lg={3} style={{border: '0px solid red', height: '50%', marginTop: '14px'}}>
-             <h4>ACCRUED AMOUNT</h4>
             </Grid>
-            <Grid item xs={12} md={8} lg={6} style={{height: '40%', marginTop: '14px'}}>
-             <p style={{color: 'black'}}>${job.amountAccrued}</p>
+            
+            <Grid item xs={4} md={6} lg={3} style={{border: '0px solid red', height: '50%',  marginTop: '1px'}}>
+             <h3>WALLET BALANCE</h3>
             </Grid>
-            <Grid item xs={12} md={8} lg={2} style={{height: '40%'}}>
+            <Grid item xs={12} md={8} lg={6} style={{height: '40%',  marginTop: '1px'}}>
               
+             <p style={{color: 'black'}}>{job.walletBalance}</p>
+             <Divider/>
+            </Grid>
+
+            <Grid item xs={12} md={8} lg={2} style={{height: '40%'}}>   
+            </Grid>
+            <Grid item xs={4} md={6} lg={3} style={{border: '0px solid red', height: '50%',  marginTop: '1px'}}>
+             <h3>ACCRUED BALANCE</h3>
+            </Grid>
+            <Grid item xs={12} md={8} lg={6} style={{height: '40%',  marginTop: '1px'}}>
+              
+             <p style={{color: 'black'}}>{job.accruedBalance}</p>
+             <Divider/>
+            </Grid>
+
+            <Grid item xs={12} md={8} lg={2} style={{height: '40%'}}>   
+            </Grid>
+            <Grid item xs={4} md={6} lg={3} style={{border: '0px solid red', height: '50%',  marginTop: '1px', }}>
+             <h3>GROUPS</h3>
+            </Grid>
+            <Grid item xs={12} md={8} lg={6} style={{height: '40%',  marginTop:'1px' }}>
+              
+            <Button
+              id="demo-customized-button"
+              aria-controls={open ? 'demo-customized-menu' : undefined}
+              aria-haspopup="true"
+              aria-expanded={open ? 'true' : undefined}
+              variant="contained"
+              disableElevation
+              onClick={handleClick}
+              endIcon={<KeyboardArrowDownIcon />}
+              style={{width: '200px',backgroundColor:"#60A1EC" }}
+           >
+            SELECT
+           </Button>
+      <StyledMenu
+        id="demo-customized-menu"
+        MenuListProps={{
+          'aria-labelledby': 'demo-customized-button',
+        }}
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+      >
+        <MenuItem onClick={handleClose} disableRipple>
+          <PersonIcon />
+          Tom Polo
+        </MenuItem>
+        <MenuItem onClick={handleClose} disableRipple>
+          <PersonIcon />
+          Clark Kent
+        </MenuItem>
+        <Divider sx={{ my: 0.5 }} />
+        <MenuItem onClick={handleClose} disableRipple>
+          <PersonIcon />
+          Paul Peter
+        </MenuItem>
+        <MenuItem onClick={handleClose} disableRipple>
+          <PersonIcon />
+          Laz Ezekwe
+        </MenuItem>
+      </StyledMenu>
+
+             {/*<p style={{color: 'black'}}>{job.members}</p>*/}
+             
             </Grid>
 
            
+
           </Grid>
                  <br/>
-          <center>
+           <Box sx={{ ml:"350px"}}>
                  <Button
                     type="submit"
                     // fullWidth
                     variant="contained"
                     style={{
-                      backgroundColor: "black",
+                     
                       color: "white",
                     //   width: "30%",
                       fontSize: "15px",
                     }}
-                    sx={{ mt: 3, mb: 2 }}
+                    sx={{ mt: 3, mb: 2 ,ml:3 ,p:2,backgroundColor:"#60A1EC" }}
                     onClick={() => {
                       navigate(`/dashboard/update-users/${params.id}`);
                     }}
                   >
                     UPDATE
                   </Button>
-          </center>
+
+          </Box>
           </>
           : 
           <center>
