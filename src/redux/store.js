@@ -3,6 +3,7 @@ import { persistReducer } from 'redux-persist';
 import thunk from 'redux-thunk';
 import storage from './storage';
 import jobReducer from './reducers/job.slice';
+import employerReducer from './reducers/employer.slice';
 import coolerReducer from './reducers/cooler.slice';
 import authReducer from './reducers/auth.slice';
 import candidateReducer from './reducers/candidate.slice';
@@ -10,6 +11,7 @@ import loggedInReducer from './reducers/loggedIn.slice';
 
 const reducers = combineReducers({
   jobs: jobReducer,
+  employers:employerReducer,
   coolers: coolerReducer,
   auth: authReducer,
   candidate: candidateReducer,
