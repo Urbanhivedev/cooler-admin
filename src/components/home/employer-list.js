@@ -208,7 +208,7 @@ export default function EmployerList({jobs}) {
       <p style={{fontSize: '26px', marginLeft: '5px', color: 'black'}}><b>ALL EMPLOYERS</b></p><br/>
       <hr />
       <TableContainer component={Paper}  >
-        <Table sx={{ maxWidth: 1300 }} aria-label="custom pagination table">
+        <Table sx={{ maxWidth: 1300, tableLayout:"fixed" }} aria-label="custom pagination table">
           <TableHead>
             <TableRow>
               <StyledTableCell>Company Name</StyledTableCell>
