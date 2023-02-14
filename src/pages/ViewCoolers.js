@@ -19,7 +19,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import ArchiveIcon from '@mui/icons-material/Archive';
 import FileCopyIcon from '@mui/icons-material/FileCopy';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import EditIcon from '@mui/icons-material/Edit';
+import PersonIcon from '@mui/icons-material/Person';
 
 const theme = createTheme();
 
@@ -170,12 +170,12 @@ export default function ViewCooler() {
               
             
              <Grid item xs={4} md={6} lg={3} style={{border: '0px solid red', height: '50%', marginTop: '14px',marginLeft: '196px'}}>
-             <h3>COOLER NAME</h3>
+             <h3>TOTAL SAVED</h3>
             
             </Grid>
             
              <Grid item xs={12} md={8} lg={6} style={{height: '40%', marginTop: '14px',}}>
-             <p style={{color: 'black'}}>${cooler.amount}</p>
+             <p style={{color: 'black'}}>${cooler.accountBalance}</p>
              <Divider/>
             </Grid>
             
@@ -221,15 +221,15 @@ export default function ViewCooler() {
             <Grid item xs={12} md={8} lg={2} style={{height: '40%'}}>   
             </Grid>
             <Grid item xs={4} md={6} lg={3} style={{border: '0px solid red', height: '50%',  marginTop: '1px'}}>
-             <h3>FEE</h3>
+             <h3>ENTRY FEE</h3>
             </Grid>
             <Grid item xs={12} md={8} lg={6} style={{height: '40%',  marginTop: '1px'}}>
               
-             <p style={{color: 'black'}}>{cooler.members}</p>
+             <p style={{color: 'black'}}>{cooler.amount}</p>
              <Divider/>
             </Grid>
             
-            <Grid item xs={12} md={8} lg={2} style={{height: '40%'}}>   
+            {/*<Grid item xs={12} md={8} lg={2} style={{height: '40%'}}>   
             </Grid>
             <Grid item xs={4} md={6} lg={3} style={{border: '0px solid red', height: '50%',  marginTop: '1px'}}>
              <h3>BALANCE</h3>
@@ -238,7 +238,7 @@ export default function ViewCooler() {
               
              <p style={{color: 'black'}}>{cooler.members}</p>
              <Divider/>
-            </Grid>
+            </Grid>*/}
 
             <Grid item xs={12} md={8} lg={2} style={{height: '40%'}}>   
             </Grid>
@@ -258,7 +258,7 @@ export default function ViewCooler() {
               endIcon={<KeyboardArrowDownIcon />}
               style={{width: '200px',backgroundColor:"#60A1EC" }}
            >
-            Select
+            Show
            </Button>
       <StyledMenu
         id="demo-customized-menu"
@@ -269,23 +269,19 @@ export default function ViewCooler() {
         open={open}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleClose} disableRipple>
-          <EditIcon />
-          Edit
-        </MenuItem>
-        <MenuItem onClick={handleClose} disableRipple>
-          <FileCopyIcon />
-          Duplicate
-        </MenuItem>
-        <Divider sx={{ my: 0.5 }} />
-        <MenuItem onClick={handleClose} disableRipple>
-          <ArchiveIcon />
-          Archive
-        </MenuItem>
-        <MenuItem onClick={handleClose} disableRipple>
-          <MoreHorizIcon />
-          More
-        </MenuItem>
+        {
+         cooler.members.map((item)=>{
+          return(
+            <MenuItem onClick={handleClose} disableRipple>
+            <PersonIcon />
+            {item}
+          </MenuItem>
+          )
+         })
+
+        }
+
+
       </StyledMenu>
 
              {/*<p style={{color: 'black'}}>{cooler.members}</p>*/}

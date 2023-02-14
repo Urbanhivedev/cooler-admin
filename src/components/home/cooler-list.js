@@ -26,6 +26,10 @@ import Skeleton from '@mui/material/Skeleton';
 import {Typography,CardMedia,} from '@material-ui/core';
 import CoolerBoxIMG from '../../assets/images/save-money.png';
 
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchAllGroups, fetchGroups, payoutMember } from 'src/redux/actions/group.action';
+import { notifyErrorFxn, notifySuccessFxn } from 'src/utils/toast-fxn';
+
 function TablePaginationActions(props) {
   const theme = useTheme();
   const { count, page, rowsPerPage, onPageChange } = props;
@@ -119,7 +123,22 @@ const useStyles = makeStyles({
   },
 });
 
+
+
+
+
 export default function CoolerList({jobs}) {
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
+  const {allGroups, myGroups, isLoading } = useSelector((state) => state.group);
+ 
+  useEffect(() => {
+    dispatch(fetchGroups(user?.id));
+    dispatch(fetchAllGroups());
+  }, [])
+ 
+ 
+ 
   //search function
   const [jobList, setJobList] = useState(jobs);
   console.log(jobs)
@@ -137,6 +156,25 @@ export default function CoolerList({jobs}) {
     requestSearch(searched);
   };
   //search function end
+
+
+  const payoutMembers = async() => {
+  
+
+    let today = new Date();
+    let date = today.getFullYear()+'-'+("0"+(today.getMonth()+1)).slice(-2)+'-'+("0"+today.getDate()).slice(-2);
+    let filteredData = allGroups.filter(item => item.payoutDate === date);
+    console.log("heyo")
+    if(filteredData.length){
+     filteredData.map(async (group, index) => {
+      await dispatch(payoutMember(group.groupId, group.members, parseInt(group.amount), group.payoutIndex, group.accountBalance, group.numOfBatchPayment, group.payoutDate, filteredData, group.groupName))
+     })
+    }else{
+      window.alert("No groups are scheduled to pay out today!")
+      notifyErrorFxn("No groups are scheduled to pay out today!");
+    }
+    
+  }
 
   const navigate = useNavigate();
   const [page, setPage] = React.useState(0);
@@ -183,7 +221,7 @@ export default function CoolerList({jobs}) {
           <>
          
 
-         {/* <div style={{float: 'right', border: '0px solid red'}}>
+         { <div style={{float: 'right', border: '0px solid red'}}>
         <Button
             type="submit"
             
@@ -192,17 +230,18 @@ export default function CoolerList({jobs}) {
               backgroundColor: "#60A1EC",
               color: "white",
               fontSize: "15px",
+              padding:"20px"
             }}
             sx={{ mt: 7, mb: 2 }}
              
-            onClick={() => {window.location.href = "/company/add-jobs"}}
+            onClick={() => {payoutMembers()}}
           >
-            ADD COOLER
+            MAKE PAYMENT 
           </Button>
             
          
 
-      </div>*/}
+      </div>}
       
       <br/>
       <p style={{fontSize: '26px', marginLeft: '5px', color: 'black'}}><b>ALL COOLERS</b></p><br/>

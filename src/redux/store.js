@@ -8,6 +8,7 @@ import coolerReducer from './reducers/cooler.slice';
 import authReducer from './reducers/auth.slice';
 import candidateReducer from './reducers/candidate.slice';
 import loggedInReducer from './reducers/loggedIn.slice';
+import groupReducer from './reducers/group.slice';
 
 const reducers = combineReducers({
   jobs: jobReducer,
@@ -16,6 +17,8 @@ const reducers = combineReducers({
   auth: authReducer,
   candidate: candidateReducer,
   loggedIn:loggedInReducer,
+  group: groupReducer,
+
 });
 
 const persistConfig = {
