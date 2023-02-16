@@ -170,7 +170,7 @@ export default function CoolerList({jobs}) {
       await dispatch(payoutMember(group.groupId, group.members, parseInt(group.amount), group.payoutIndex, group.accountBalance, group.numOfBatchPayment, group.payoutDate, filteredData, group.groupName))
      })
     }else{
-      window.alert("No groups are scheduled to pay out today!")
+     
       notifyErrorFxn("No groups are scheduled to pay out today!");
     }
     
@@ -247,7 +247,7 @@ export default function CoolerList({jobs}) {
       <p style={{fontSize: '26px', marginLeft: '5px', color: 'black'}}><b>ALL COOLERS</b></p><br/>
       <hr />
       <TableContainer component={Paper}  >
-        <Table sx={{ maxWidth: 1300 }} aria-label="custom pagination table">
+        <Table sx={{ maxWidth: 1300, tableLayout:"fixed" }} aria-label="custom pagination table">
           <TableHead>
             <TableRow>
               <StyledTableCell>Group Name</StyledTableCell>

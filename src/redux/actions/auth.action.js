@@ -2,8 +2,9 @@ import { db, fb, auth, storage } from '../../config/firebase';
 import {  loginFailed, loginSuccess} from '../reducers/loggedIn.slice';
 import { clearUser,  signupFailed, storeUserData } from '../reducers/auth.slice';
 import { v4 as uuidv4 } from 'uuid';
+import { notifyErrorFxn, notifySuccessFxn } from 'src/utils/toast-fxn';
 
-  export const signin = (user, navigate) => async (dispatch) => {
+  export const signin = (user, navigate,setLoading) => async (dispatch) => {
     fb.auth().signInWithEmailAndPassword(user.email, user.password)
     .then((userCredential) => {
       // Signed in
@@ -13,9 +14,11 @@ import { v4 as uuidv4 } from 'uuid';
       navigate('/dashboard/home');
     })
     .catch((error) => {
-      
-      var errorCode = error.code;
-      var errorMessage = error.message;
+      setLoading(false);
+    
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      notifyErrorFxn(errorMessage);
       console.log('Error Code is: ', errorCode, + ' Msg is: ', errorMessage);
       dispatch(loginFailed(errorMessage));
     });
