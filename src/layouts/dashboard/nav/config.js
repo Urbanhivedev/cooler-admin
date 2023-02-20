@@ -33,11 +33,11 @@ const navConfig = [
   },
   
 
-  {
+ /* {
     title: 'Settings',
     path: '/dashboard/home2',
     iconLabel: 'settings',
-  },
+  },*/
 ];
 
 export default navConfig;

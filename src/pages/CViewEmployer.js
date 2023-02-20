@@ -270,16 +270,16 @@ export default function CViewJob() {
         </MenuItem>
         <MenuItem onClick={handleClose} disableRipple>
           <PersonIcon />
-          Clark Kent
+          Larry Smith
         </MenuItem>
         <Divider sx={{ my: 0.5 }} />
         <MenuItem onClick={handleClose} disableRipple>
           <PersonIcon />
-          Paul Peter
+          Laz Ezekwe
         </MenuItem>
         <MenuItem onClick={handleClose} disableRipple>
           <PersonIcon />
-          Laz Ezekwe
+          America Ferrera
         </MenuItem>
       </StyledMenu>
 
@@ -321,20 +321,20 @@ export default function CViewJob() {
       >
         <MenuItem onClick={handleClose} disableRipple>
           <PersonIcon />
-          Tom Polo
+          Japa Savers
         </MenuItem>
         <MenuItem onClick={handleClose} disableRipple>
           <PersonIcon />
-          Clark Kent
+          Investment Fund
         </MenuItem>
         <Divider sx={{ my: 0.5 }} />
         <MenuItem onClick={handleClose} disableRipple>
           <PersonIcon />
-          Paul Peter
+          God did Savers
         </MenuItem>
         <MenuItem onClick={handleClose} disableRipple>
           <PersonIcon />
-          Laz Ezekwe
+          Lamborghini Savers
         </MenuItem>
       </StyledMenu>
 

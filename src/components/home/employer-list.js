@@ -258,6 +258,24 @@ export default function EmployerList({jobs}) {
                     VIEW
                   </Button>
                 </TableCell>
+
+                <TableCell style={{ width: 180 }} align="right">
+                  <Button
+                    type="submit"
+                    // fullWidth
+                    variant="contained"
+                    style={{
+                      backgroundColor: "#60A1EC",
+                      color: "white",
+                      width: "70%",
+                      fontSize: "15px",
+                    }}
+                    sx={{ mt: 7, mb: 2 }}
+                    onClick={() => viewJobsFxn(row.id)}
+                  >
+                   DELETE
+                  </Button>
+                </TableCell>
               </TableRow>
             ))}
 

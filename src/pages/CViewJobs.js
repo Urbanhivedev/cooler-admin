@@ -286,20 +286,20 @@ export default function CViewJob() {
       >
         <MenuItem onClick={handleClose} disableRipple>
           <PersonIcon />
-          Tom Polo
+          Lamborghini Savers
         </MenuItem>
         <MenuItem onClick={handleClose} disableRipple>
           <PersonIcon />
-          Clark Kent
+          Investment Savers
         </MenuItem>
         <Divider sx={{ my: 0.5 }} />
         <MenuItem onClick={handleClose} disableRipple>
           <PersonIcon />
-          Paul Peter
+          Japa Savers
         </MenuItem>
         <MenuItem onClick={handleClose} disableRipple>
           <PersonIcon />
-          Laz Ezekwe
+          Investment Fund
         </MenuItem>
       </StyledMenu>
 
