@@ -90,7 +90,7 @@ function TablePaginationActions(props) {
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor:"#60A1EC",
+    backgroundColor:'#4B6DF1' /*"#60A1EC"*/,
     color: theme.palette.common.white,
     
   },
@@ -217,6 +217,7 @@ export default function EmployerList({jobs}) {
               <StyledTableCell align="right">Number in Group</StyledTableCell>
              
               <StyledTableCell align="right"></StyledTableCell>
+              <StyledTableCell align="right"></StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -247,7 +248,7 @@ export default function EmployerList({jobs}) {
                     // fullWidth
                     variant="contained"
                     style={{
-                      backgroundColor: "#60A1EC",
+                      backgroundColor: '#4B6DF1' /*"#60A1EC"*/,
                       color: "white",
                       width: "70%",
                       fontSize: "15px",
@@ -259,13 +260,15 @@ export default function EmployerList({jobs}) {
                   </Button>
                 </TableCell>
 
+
+
                 <TableCell style={{ width: 180 }} align="right">
                   <Button
                     type="submit"
                     // fullWidth
                     variant="contained"
                     style={{
-                      backgroundColor: "#60A1EC",
+                      backgroundColor:'#4B6DF1' /*"#60A1EC"*/,
                       color: "white",
                       width: "70%",
                       fontSize: "15px",

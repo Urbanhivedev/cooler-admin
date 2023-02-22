@@ -9,6 +9,8 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { styled,alpha } from '@mui/material/styles';
 import JobLogo from '../assets/images/Cooler.png';
 import { getSingleCooler } from "../redux/actions/cooler.action";
+import { fetchGroupMembers } from "src/redux/actions/group.action";
+
 import Skeleton from '@mui/material/Skeleton';
 
 
@@ -28,12 +30,32 @@ export default function ViewCooler() {
     const navigate = useNavigate();
     const params = useParams();
    
-   
+   const [groupPeople,setGroupPeople] = useState(["loading..."])
+
+
+
+
     const { cooler } = useSelector((state) => state.coolers);
 
     useEffect(() => {
-      dispatch(getSingleCooler(params.id));  
+      dispatch(getSingleCooler(params.id)); 
+      
      }, [])
+
+     const { groupMembers } = useSelector((state) => state.group);
+
+     useEffect(() => {
+      
+      if(cooler){
+        
+        dispatch(fetchGroupMembers(cooler.members)); 
+        groupMembers.length?setGroupPeople(groupMembers):setGroupPeople([{firstName:"No one has",lastName:"joined this group."}])
+
+
+        console.log(groupPeople)
+      }
+     }, [cooler])
+
 
 
     const myHeader = {
@@ -256,7 +278,7 @@ export default function ViewCooler() {
               disableElevation
               onClick={handleClick}
               endIcon={<KeyboardArrowDownIcon />}
-              style={{width: '200px',backgroundColor:"#60A1EC" }}
+              style={{width: '200px',backgroundColor:'#4B6DF1' /*"#60A1EC"*/ }}
            >
             Show
            </Button>
@@ -270,11 +292,11 @@ export default function ViewCooler() {
         onClose={handleClose}
       >
         {
-         cooler.members.map((item)=>{
+         groupPeople.map((item)=>{
           return(
             <MenuItem onClick={handleClose} disableRipple>
             <PersonIcon />
-            {item}
+            {item.firstName + " " + item.lastName}
           </MenuItem>
           )
          })
@@ -303,7 +325,7 @@ export default function ViewCooler() {
                     //   width: "30%",
                       fontSize: "15px",
                     }}
-                    sx={{ mt: 3, mb: 2 ,ml:3 ,p:2,backgroundColor:"#60A1EC" }}
+                    sx={{ mt: 3, mb: 2 ,ml:3 ,p:2,backgroundColor:'#4B6DF1' /*"#60A1EC"*/ }}
                     onClick={() => {
                       navigate(`/dashboard/update-coolers/${params.id}`);
                     }}
@@ -321,7 +343,7 @@ export default function ViewCooler() {
                     //   width: "30%",
                       fontSize: "15px",
                     }}
-                    sx={{ mt: 3, mb: 2 , ml:3,p:2,backgroundColor:"#60A1EC" }}
+                    sx={{ mt: 3, mb: 2 , ml:3,p:2,backgroundColor:'#4B6DF1' /*"#60A1EC"*/ }}
                     onClick={() => {
                       navigate(`/dashboard/transfer-coolers/${params.id}`);
                     }}

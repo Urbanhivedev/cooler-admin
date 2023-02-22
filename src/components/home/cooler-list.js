@@ -94,7 +94,7 @@ function TablePaginationActions(props) {
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor:"#60A1EC",
+    backgroundColor:'#4B6DF1' /*"#60A1EC"*/,
     color: theme.palette.common.white,
     
   },
@@ -227,7 +227,7 @@ export default function CoolerList({jobs}) {
             
             variant="contained"
             style={{
-              backgroundColor: "#60A1EC",
+              backgroundColor: '#4B6DF1' /*"#60A1EC"*/,
               color: "white",
               fontSize: "15px",
               padding:"20px"
@@ -289,7 +289,7 @@ export default function CoolerList({jobs}) {
                     // fullWidth
                     variant="contained"
                     style={{
-                      backgroundColor: "#60A1EC",
+                      backgroundColor: '#4B6DF1' /*"#60A1EC"*/,
                       color: "white",
                       width: "70%",
                       fontSize: "15px",
@@ -298,6 +298,25 @@ export default function CoolerList({jobs}) {
                     onClick={() => viewJobsFxn(row.id)}
                   >
                     VIEW
+                  </Button>
+                </TableCell>
+
+
+                <TableCell style={{ width: 180 }} align="right">
+                  <Button
+                    type="submit"
+                    // fullWidth
+                    variant="contained"
+                    style={{
+                      backgroundColor: '#4B6DF1' /*"#60A1EC"*/,
+                      color: "white",
+                      width: "70%",
+                      fontSize: "15px",
+                    }}
+                    sx={{ mt: 7, mb: 2 }}
+                    onClick={() => viewJobsFxn(row.id)}
+                  >
+                    DELETE
                   </Button>
                 </TableCell>
               </TableRow>

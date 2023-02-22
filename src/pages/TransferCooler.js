@@ -189,7 +189,7 @@ export default function ViewCooler() {
               disableElevation
               onClick={handleClick}
               endIcon={<KeyboardArrowDownIcon />}
-              style={{width: '400px',padding:"10px",backgroundColor:"#60A1EC", fontSize:"22px" }}
+              style={{width: '400px',padding:"10px",backgroundColor:'#4B6DF1' /*"#60A1EC"*/, fontSize:"22px" }}
            >
             Select
            </Button>
@@ -258,7 +258,7 @@ export default function ViewCooler() {
                     //   width: "30%",
                       fontSize: "15px",
                     }}
-                    sx={{ mt: 3, mb: 2 , ml:3,p:2,backgroundColor:"#60A1EC" }}
+                    sx={{ mt: 3, mb: 2 , ml:3,p:2,backgroundColor:'#4B6DF1' /*"#60A1EC"*/ }}
                     onClick={() => {
                       navigate(`/dashboard/transfer-coolers/${params.id}`);
                     }}

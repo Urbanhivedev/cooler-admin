@@ -90,7 +90,7 @@ function TablePaginationActions(props) {
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor:"#60A1EC",
+    backgroundColor:'#4B6DF1' /*"#60A1EC"*/,
     color: theme.palette.common.white,
     width:150
   },
@@ -248,7 +248,7 @@ export default function CJobList({jobs}) {
                     // fullWidth
                     variant="contained"
                     style={{
-                      backgroundColor: "#60A1EC",
+                      backgroundColor: '#4B6DF1'/*"#60A1EC"*/,
                       color: "white",
                       width: "70%",
                       fontSize: "15px",
@@ -267,7 +267,7 @@ export default function CJobList({jobs}) {
                     // fullWidth
                     variant="contained"
                     style={{
-                      backgroundColor: "#60A1EC",
+                      backgroundColor: '#4B6DF1'/*"#60A1EC"*/,
                       color: "white",
                       width: "70%",
                       fontSize: "15px",

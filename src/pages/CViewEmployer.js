@@ -251,7 +251,7 @@ export default function CViewJob() {
               disableElevation
               onClick={handleClick}
               endIcon={<KeyboardArrowDownIcon />}
-              style={{width: '200px',backgroundColor:"#60A1EC" }}
+              style={{width: '200px',backgroundColor:'#4B6DF1' /*"#60A1EC"*/}}
            >
             SELECT
            </Button>
@@ -306,7 +306,7 @@ export default function CViewJob() {
               disableElevation
               onClick={handleClick}
               endIcon={<KeyboardArrowDownIcon />}
-              style={{width: '200px',backgroundColor:"#60A1EC" }}
+              style={{width: '200px',backgroundColor:'#4B6DF1' /*"#60A1EC"*/ }}
            >
             SELECT
            </Button>
@@ -357,7 +357,7 @@ export default function CViewJob() {
                     //   width: "30%",
                       fontSize: "15px",
                     }}
-                    sx={{ mt: 3, mb: 2 ,ml:3 ,p:2,backgroundColor:"#60A1EC" }}
+                    sx={{ mt: 3, mb: 2 ,ml:3 ,p:2,backgroundColor:'#4B6DF1' /*"#60A1EC"*/}}
                     onClick={() => {
                       navigate(`/dashboard/update-employers/${params.id}`);
                     }}

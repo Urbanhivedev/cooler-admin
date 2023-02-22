@@ -218,7 +218,7 @@ export default function UpdateCooler() {
                     // fullWidth
                     variant="contained"
                     style={{
-                      backgroundColor:"#60A1EC" ,
+                      backgroundColor:'#4B6DF1' /*"#60A1EC"*/ ,
                       color: "white",
                     //   width: "30%",
                       fontSize: "15px",

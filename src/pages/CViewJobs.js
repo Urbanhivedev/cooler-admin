@@ -9,6 +9,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { styled,alpha } from '@mui/material/styles';
 import JobLogo from '../assets/images/Cooler.png';
 import { getSingleJob } from "../redux/actions/job.action";
+import { fetchGroupMembers } from "../redux/actions/group.action";
 import Skeleton from '@mui/material/Skeleton';
 
 import Menu, { MenuProps } from '@mui/material/Menu';
@@ -46,7 +47,9 @@ export default function CViewJob() {
     const { job } = useSelector((state) => state.jobs);
 
     useEffect(() => {
-      dispatch(getSingleJob(params.id));  
+      dispatch(getSingleJob(params.id)); 
+
+
      }, [])
 
 
@@ -271,7 +274,7 @@ export default function CViewJob() {
               disableElevation
               onClick={handleClick}
               endIcon={<KeyboardArrowDownIcon />}
-              style={{width: '200px',backgroundColor:"#60A1EC" }}
+              style={{width: '200px',backgroundColor:'#4B6DF1' /*"#60A1EC"*/ }}
            >
             SELECT
            </Button>
@@ -322,7 +325,7 @@ export default function CViewJob() {
                     //   width: "30%",
                       fontSize: "15px",
                     }}
-                    sx={{ mt: 3, mb: 2 ,ml:3 ,p:2,backgroundColor:"#60A1EC" }}
+                    sx={{ mt: 3, mb: 2 ,ml:3 ,p:2,backgroundColor:'#4B6DF1' /*"#60A1EC"*/}}
                     onClick={() => {
                       navigate(`/dashboard/update-users/${params.id}`);
                     }}
