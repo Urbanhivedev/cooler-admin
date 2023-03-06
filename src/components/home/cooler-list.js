@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
+import PropTypes, { string } from "prop-types";
 import { useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Table from "@mui/material/Table";
@@ -29,6 +29,8 @@ import CoolerBoxIMG from '../../assets/images/save-money.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllGroups, fetchGroups, payoutMember } from 'src/redux/actions/group.action';
 import { notifyErrorFxn, notifySuccessFxn } from 'src/utils/toast-fxn';
+
+import { deleteSingleCooler } from "../../redux/actions/cooler.action";
 
 function TablePaginationActions(props) {
   const theme = useTheme();
@@ -94,7 +96,7 @@ function TablePaginationActions(props) {
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor:'#4B6DF1' /*"#60A1EC"*/,
+    backgroundColor:'#130C66' /*"#60A1EC"*/,
     color: theme.palette.common.white,
     
   },
@@ -131,17 +133,19 @@ export default function CoolerList({jobs}) {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const {allGroups, myGroups, isLoading } = useSelector((state) => state.group);
- 
+  const [jobList, setJobList] = useState(jobs);
+  console.log(jobs)
+  
   useEffect(() => {
     dispatch(fetchGroups(user?.id));
     dispatch(fetchAllGroups());
   }, [])
+
  
  
  
   //search function
-  const [jobList, setJobList] = useState(jobs);
-  console.log(jobs)
+  
   const [searched, setSearched] = useState("");
   const classes = useStyles();
   const requestSearch = (searchedVal) => {
@@ -166,8 +170,8 @@ export default function CoolerList({jobs}) {
     let filteredData = allGroups.filter(item => item.payoutDate === date);
     console.log("heyo")
     if(filteredData.length){
-     filteredData.map(async (group, index) => {
-      await dispatch(payoutMember(group.groupId, group.members, parseInt(group.amount), group.payoutIndex, group.accountBalance, group.numOfBatchPayment, group.payoutDate, filteredData, group.groupName))
+     filteredData.map( (group, index) => {
+       dispatch(payoutMember(group.groupId, group.members, parseInt(group.amount), group.payoutIndex, group.accountBalance, group.numOfBatchPayment, group.payoutDate, filteredData, group.groupName))
      })
     }else{
      
@@ -195,6 +199,21 @@ export default function CoolerList({jobs}) {
     navigate(`/dashboard/view-coolers/${id}`);
   };
 
+  const deleteCoolerFxn = (id) => {
+    const preserveId = id
+    
+  if(window.confirm("are you sure you want to delete this cooler?")){
+   
+    dispatch(deleteSingleCooler(id)); 
+    
+    notifySuccessFxn("Cooler Successfully Deleted!");
+    
+   setTimeout(function(){window.location.reload()},3000);
+    
+    
+  }
+  
+};
 
   
 
@@ -227,7 +246,7 @@ export default function CoolerList({jobs}) {
             
             variant="contained"
             style={{
-              backgroundColor: '#4B6DF1' /*"#60A1EC"*/,
+              backgroundColor: '#130C66' ,
               color: "white",
               fontSize: "15px",
               padding:"20px"
@@ -241,7 +260,7 @@ export default function CoolerList({jobs}) {
             
          
 
-      </div>}
+          </div>}
       
       <br/>
       <p style={{fontSize: '26px', marginLeft: '5px', color: 'black'}}><b>ALL COOLERS</b></p><br/>
@@ -275,7 +294,7 @@ export default function CoolerList({jobs}) {
                   ${row.amount && row.amount}
                 </TableCell>
                 <TableCell style={{ width: 140 }} align="right">
-                {row.accountCreated?(new Date(row.accountCreated.seconds*1000)).toLocaleDateString():"01/01/2023"}
+                {row.accountCreated &&typeof(row.accountCreated) !== "string"  ?(new Date(row.accountCreated.seconds*1000)).toDateString():row.accountCreated}
                 </TableCell>
                 <TableCell style={{ width: 140 }} align="right">
                 {row.noOfSavers && row.noOfSavers}
@@ -289,7 +308,7 @@ export default function CoolerList({jobs}) {
                     // fullWidth
                     variant="contained"
                     style={{
-                      backgroundColor: '#4B6DF1' /*"#60A1EC"*/,
+                      backgroundColor: '#130C66' /*"#60A1EC"*/,
                       color: "white",
                       width: "70%",
                       fontSize: "15px",
@@ -308,13 +327,13 @@ export default function CoolerList({jobs}) {
                     // fullWidth
                     variant="contained"
                     style={{
-                      backgroundColor: '#4B6DF1' /*"#60A1EC"*/,
+                      backgroundColor: '#130C66' /*"#60A1EC"*/,
                       color: "white",
                       width: "70%",
                       fontSize: "15px",
                     }}
                     sx={{ mt: 7, mb: 2 }}
-                    onClick={() => viewJobsFxn(row.id)}
+                    onClick={() => deleteCoolerFxn(row.id)}
                   >
                     DELETE
                   </Button>

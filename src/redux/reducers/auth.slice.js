@@ -25,6 +25,9 @@ const loginSlice = createSlice({
         state.error = action.payload;
         state.user = null;
       },
+      storeUserData: (state, action) => {
+        state.user = action.payload;
+      },
     clearUser: (state) => {
       return {
         ...initialState,
@@ -38,6 +41,7 @@ const { actions, reducer } = loginSlice;
 export const {
  loginSuccess,
  loginFailed,
+ storeUserData,
  signupFailed,
  clearUser,
 } = actions;

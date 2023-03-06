@@ -20,6 +20,11 @@ const employerSlice = createSlice({
         state.employer = action.payload;
       },
 
+      confirmDeletedEmployer: (state, action) => {
+        state.message = action.payload;
+      },
+
+
     initiatePending: (state) => {
       state.isLoading = true;
       state.error = '';
@@ -38,6 +43,7 @@ const { actions, reducer } = employerSlice;
 export const {
  fetchEmployers,
  fetchSingleEmployer,
+ confirmDeletedEmployer 
 } = actions;
 
 export default reducer;

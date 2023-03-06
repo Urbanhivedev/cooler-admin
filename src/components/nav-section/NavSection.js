@@ -18,7 +18,7 @@ NavSection.propTypes = {
 export default function NavSection({ data = [], ...other }) {
   return (
     <Box {...other}>
-      <List disablePadding sx={{ p: 1 }}>
+      <List disablePadding style={{display:"flex",flexDirection:"column",marginTop:"25px" }} sx={{ px: 1,py:0,}}>
         {data.map((item) => (
           <>
           <NavItem key={item.title} item={item}/>
@@ -49,10 +49,11 @@ function NavItem({ item }) {
     <StyledNavItem
       component={RouterLink}
       to={path}
+      style={{height:"32px",marginTop:"-20px",marginBottom:"-20px"}}
       sx={{
         width:"100%",
         borderRadius:"10px",
-        marginBottom:"-24px",
+        
         '&.active': {
           color: 'black',
           // bgcolor: '#66000000',
@@ -62,15 +63,16 @@ function NavItem({ item }) {
          
 
         },
+        
       }}
     >
-      {iconLabel !== 'msg' && iconLabel !== 'settings' && <StyledNavItemIcon sx={{color: '#FFFFFF', fontSize: '20px'}}>{icon && icon}</StyledNavItemIcon>}
+      {iconLabel !== 'msg' && iconLabel !== 'settings' && <StyledNavItemIcon sx={{color: '#FFFFFF', fontSize: '17px'}}>{icon && icon}</StyledNavItemIcon>}
       
-      {iconLabel === 'msg' && <StyledNavItemIcon sx={{color: '#FFFFFF', fontSize: '20px'}}><MessageIcon /></StyledNavItemIcon>}
+      {iconLabel === 'msg' && <StyledNavItemIcon sx={{color: '#FFFFFF', fontSize: '17px'}}><MessageIcon /></StyledNavItemIcon>}
       
-      {iconLabel === 'settings' && <StyledNavItemIcon sx={{color: '#FFFFFF', fontSize: '20px'}}><SettingsIcon /></StyledNavItemIcon>}
+      {iconLabel === 'settings' && <StyledNavItemIcon sx={{color: '#FFFFFF', fontSize: '17px'}}><SettingsIcon /></StyledNavItemIcon>}
 
-      <ListItemText disableTypography primary={title} sx={{color: '#FFFFFF', fontSize: '18px'}}/>
+      <ListItemText disableTypography primary={title} sx={{color: '#FFFFFF', fontSize: '15px'}}/>
 
       {info && info}
     </StyledNavItem>

@@ -17,12 +17,23 @@ const theme = createTheme();
 
 export default function ViewAllEmployers() {
   const dispatch = useDispatch();
-  const { employers } = useSelector((state) => state.employers);
+  const { employers,message } = useSelector((state) => state.employers);
   const [coolerArr, setCoolerArr] = useState(employers);
+  const [updateScreen, setUpdateScreen] = useState('');
  useEffect(() => {
    dispatch(getEmployers());  
-   setCoolerArr(employers);
-  }, [])
+   
+   setCoolerArr(employers)
+   
+    
+  }, [updateScreen])
+
+  useEffect(() => {
+    if(coolerArr.length === 0 ){
+      setCoolerArr(employers);
+      
+       }  
+     }, [employers,updateScreen])
 
   console.log('coolerArr: ', coolerArr);
 
@@ -31,7 +42,7 @@ export default function ViewAllEmployers() {
         
         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
         {coolerArr.length ?
-           <EmployerList jobs={employers} />
+           <EmployerList jobs={coolerArr} setUpdateScreen={setUpdateScreen} />
            :
            <center>
            <Box sx={{ width: 300 }}>

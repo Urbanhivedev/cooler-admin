@@ -1,5 +1,5 @@
 import { db } from "../../config/firebase";
-import { fetchEmployers, fetchSingleEmployer } from "../reducers/employer.slice";
+import { fetchEmployers, fetchSingleEmployer, confirmDeletedEmployer } from "../reducers/employer.slice";
 
 
 export const getEmployers = (uid) => async (dispatch) => {
@@ -70,5 +70,17 @@ export const updateEmployer = (job, setLoading, history) => async (dispatch) => 
         // alert('Error updating job.❌')
         setLoading(false);
     });
+
+};
+
+
+export const deleteSingleEmployer = (id) => async (dispatch) => {
+    var job = db.collection("employers").doc(id);
+
+    job.delete().then(() => {
+     console.log("entry deleted")
+}).catch((error) => {
+    console.log("Error deleting document:", error);
+});
 
 };

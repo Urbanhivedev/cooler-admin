@@ -78,3 +78,14 @@ export const updateCooler = (cooler, setLoading, navigate) => async (dispatch) =
     });
 
 };
+
+export const deleteSingleCooler = (id) => async (dispatch) => {
+    var job = db.collection("groups").doc(id);
+
+    job.delete().then(() => {
+     console.log("cooler deleted")
+}).catch((error) => {
+    console.log("Error deleting document:", error);
+});
+
+};

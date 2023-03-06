@@ -14,8 +14,10 @@ import LoginForm from 'src/components/login/LoginForm';
 // ----------------------------------------------------------------------
 
 const StyledRoot = styled('div')(({ theme }) => ({
+  
   [theme.breakpoints.up('md')]: {
     display: 'flex',
+   
   },
 }));
 
@@ -37,6 +39,7 @@ const StyledContent = styled('div')(({ theme }) => ({
   justifyContent: 'center',
   flexDirection: 'column',
   padding: theme.spacing(12, 0),
+  
 }));
 
 // ----------------------------------------------------------------------
@@ -50,18 +53,18 @@ export default function LoginPage() {
         <title> Login | Cooler Web </title>
       </Helmet>
 
-      <StyledRoot>
+      <StyledRoot sx={{backgroundColor:"#FFFFFF"}}>
       {/* <Typography variant="h3" sx={{ px: 5, mt: 10, mb: 5 }}>
       <img src={Piggy} width="100" height="100"/>
     </Typography> */}
       
 
         {mdUp && (
-          <StyledSection>
+          <StyledSection style={{backgroundColor:"#FFFFFF"}}>
             <Typography variant="h3" sx={{ px: 5, mt: 10, mb: 5 }}>
               Hi, Welcome Back
             </Typography>
-            <img src="/assets/illustrations/illustration_login.png" alt="login" />
+            <img src="/assets/illustrations/admin-welcome.jpg" alt="login" />
           </StyledSection>
         )}
 
@@ -73,9 +76,7 @@ export default function LoginPage() {
             
 
             <Divider sx={{ my: 3 }}>
-              <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                OR
-              </Typography>
+              
             </Divider>
 
             <LoginForm />

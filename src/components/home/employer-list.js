@@ -19,6 +19,13 @@ import LastPageIcon from "@mui/icons-material/LastPage";
 import { styled } from "@mui/styles";
 import { Button, Grid, makeStyles } from "@material-ui/core";
 import { Link, NavLink, useNavigate} from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import { notifyErrorFxn, notifySuccessFxn } from 'src/utils/toast-fxn';
+
+
+import { useDispatch, useSelector } from "react-redux";
+import { deleteSingleEmployer } from "../../redux/actions/employer.action";
+
 //import SearchBar from "material-ui-search-bar";
 //import useRequest from "../../hooks/use-request";
 import { fetchJobs } from "../../redux/actions/job.action";
@@ -90,7 +97,7 @@ function TablePaginationActions(props) {
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor:'#4B6DF1' /*"#60A1EC"*/,
+    backgroundColor:'#130C66' /*"#60A1EC"*/,
     color: theme.palette.common.white,
     
   },
@@ -119,7 +126,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function EmployerList({jobs}) {
+export default function EmployerList({jobs,setUpdateScreen}) {
   //search function
   const [jobList, setJobList] = useState(jobs);
   console.log(jobs)
@@ -138,6 +145,8 @@ export default function EmployerList({jobs}) {
   };
   //search function end
 
+const dispatch = useDispatch()
+
   const navigate = useNavigate();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -155,6 +164,27 @@ export default function EmployerList({jobs}) {
   };
   const viewJobsFxn = (id) => {
     navigate(`/dashboard/view-employers/${id}`);
+  };
+
+  const { message } = useSelector((state) => state.employers);
+
+ 
+
+  const deleteEmployerFxn = (id) => {
+      const preserveId = id
+      
+    if(window.confirm("are you sure you want to delete this employer?")){
+     
+      dispatch(deleteSingleEmployer(id)); 
+      
+      notifySuccessFxn("Employer Successfully Deleted!");
+      
+        setUpdateScreen(preserveId)
+     setTimeout(function(){window.location.reload()},3000);
+      
+      
+    }
+    
   };
 
 
@@ -236,7 +266,7 @@ export default function EmployerList({jobs}) {
                   {row.email && row.email}
                 </TableCell>
                 <TableCell style={{ width: 140 }} align="right">
-                {row.accountCreated?(new Date(row.accountCreated.seconds*1000)).toLocaleDateString():"01/01/2023"}
+                {row.accountCreated &&typeof(row.accountCreated) !== "string"  ?(new Date(row.accountCreated.seconds*1000)).toDateString():row.accountCreated}
                 </TableCell>
                 <TableCell style={{ width: 140 }} align="right">
                 {row.employerNumber && row.employerNumber}
@@ -248,7 +278,7 @@ export default function EmployerList({jobs}) {
                     // fullWidth
                     variant="contained"
                     style={{
-                      backgroundColor: '#4B6DF1' /*"#60A1EC"*/,
+                      backgroundColor: '#130C66' /*"#60A1EC"*/,
                       color: "white",
                       width: "70%",
                       fontSize: "15px",
@@ -268,13 +298,13 @@ export default function EmployerList({jobs}) {
                     // fullWidth
                     variant="contained"
                     style={{
-                      backgroundColor:'#4B6DF1' /*"#60A1EC"*/,
+                      backgroundColor:'#130C66' /*"#60A1EC"*/,
                       color: "white",
                       width: "70%",
                       fontSize: "15px",
                     }}
                     sx={{ mt: 7, mb: 2 }}
-                    onClick={() => viewJobsFxn(row.id)}
+                    onClick={() => deleteEmployerFxn(row.id)}
                   >
                    DELETE
                   </Button>

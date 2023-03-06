@@ -237,58 +237,10 @@ export default function CViewJob() {
             
             
             
-            <Grid item xs={4} md={6} lg={3} style={{border: '0px solid red', height: '50%',  marginTop: '1px', }}>
-             <h3>EMPLOYEES</h3>
-            </Grid>
-            <Grid item xs={12} md={8} lg={6} style={{height: '40%',  marginTop:'1px' }}>
-              
-            <Button
-              id="demo-customized-button"
-              aria-controls={open ? 'demo-customized-menu' : undefined}
-              aria-haspopup="true"
-              aria-expanded={open ? 'true' : undefined}
-              variant="contained"
-              disableElevation
-              onClick={handleClick}
-              endIcon={<KeyboardArrowDownIcon />}
-              style={{width: '200px',backgroundColor:'#4B6DF1' /*"#60A1EC"*/}}
-           >
-            SELECT
-           </Button>
-      <StyledMenu
-        id="demo-customized-menu"
-        MenuListProps={{
-          'aria-labelledby': 'demo-customized-button',
-        }}
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-      >
-        <MenuItem onClick={handleClose} disableRipple>
-          <PersonIcon />
-          Tom Polo
-        </MenuItem>
-        <MenuItem onClick={handleClose} disableRipple>
-          <PersonIcon />
-          Larry Smith
-        </MenuItem>
-        <Divider sx={{ my: 0.5 }} />
-        <MenuItem onClick={handleClose} disableRipple>
-          <PersonIcon />
-          Laz Ezekwe
-        </MenuItem>
-        <MenuItem onClick={handleClose} disableRipple>
-          <PersonIcon />
-          America Ferrera
-        </MenuItem>
-      </StyledMenu>
+          
+           
 
-             {/*<p style={{color: 'black'}}>{job.members}</p>*/}
-             
-            </Grid>
-
-            <Grid item xs={12} md={8} lg={2} style={{height: '40%'}}>   
-            </Grid>
+           
             
             
             
@@ -306,7 +258,7 @@ export default function CViewJob() {
               disableElevation
               onClick={handleClick}
               endIcon={<KeyboardArrowDownIcon />}
-              style={{width: '200px',backgroundColor:'#4B6DF1' /*"#60A1EC"*/ }}
+              style={{width: '200px',backgroundColor:'#130C66' /*"#60A1EC"*/ }}
            >
             SELECT
            </Button>
@@ -357,7 +309,7 @@ export default function CViewJob() {
                     //   width: "30%",
                       fontSize: "15px",
                     }}
-                    sx={{ mt: 3, mb: 2 ,ml:3 ,p:2,backgroundColor:'#4B6DF1' /*"#60A1EC"*/}}
+                    sx={{ mt: 3, mb: 2 ,ml:3 ,p:2,backgroundColor:'#130C66' /*"#60A1EC"*/}}
                     onClick={() => {
                       navigate(`/dashboard/update-employers/${params.id}`);
                     }}

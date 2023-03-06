@@ -39,10 +39,15 @@ export default function CJobs() {
  
  useEffect(() => {
    dispatch(getJobs());  
-   setJobArr(jobs);
+   setTimeout(setJobArr(jobs), 1000);
   }, [])
 
 
+  useEffect(() => {
+    if(jobArr.length === 0 ){
+      setJobArr(jobs);
+       }  
+     }, [jobs])
 
   console.log('jobArr: ', jobArr);
 

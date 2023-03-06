@@ -18,11 +18,23 @@ const theme = createTheme();
 export default function ViewAllCoolers() {
   const dispatch = useDispatch();
   const { coolers } = useSelector((state) => state.coolers);
-  const [coolerArr, setCoolerArr] = useState(coolers);
- useEffect(() => {
-   dispatch(getCoolers());  
-   setCoolerArr(coolers);
+  const [coolerArr, setCoolerArr] = useState([]);
+ 
+ 
+  useEffect(() => {
+   dispatch(getCoolers()); 
+   console.log("THIS IS THE COOLERS ARR",coolers) 
+    setTimeout(setCoolerArr(coolers),1000); 
+ 
   }, [])
+
+ useEffect(() => {
+  if(coolerArr.length === 0 && coolers.length > 0  ){
+    setCoolerArr(coolers);
+     }  
+   }, [coolers])
+
+  
 
   console.log('coolerArr: ', coolerArr);
 
@@ -30,8 +42,8 @@ export default function ViewAllCoolers() {
       
         
         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-        {coolerArr.length ?
-           <CoolerList jobs={coolers} />
+        {coolerArr.length ? 
+           <CoolerList jobs={coolerArr}  />
            :
            <center>
            <Box sx={{ width: 300 }}>

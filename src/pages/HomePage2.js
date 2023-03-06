@@ -19,7 +19,7 @@ export default function HomePage() {
   return (
     <>
       <Helmet>
-        <title> MDLiaison | Company Panel </title>
+        <title> Cooler web | Admin Panel </title>
       </Helmet>
 
       <Container maxWidth="xl">

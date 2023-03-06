@@ -26,6 +26,13 @@ import Skeleton from '@mui/material/Skeleton';
 import {Typography,CardMedia,} from '@material-ui/core';
 import CoolerBoxIMG from '../../assets/images/save-money.png';
 
+import { notifyErrorFxn, notifySuccessFxn } from 'src/utils/toast-fxn';
+
+
+import { useDispatch, useSelector } from "react-redux";
+
+import { deleteSingleJob } from "../../redux/actions/job.action";
+
 function TablePaginationActions(props) {
   const theme = useTheme();
   const { count, page, rowsPerPage, onPageChange } = props;
@@ -90,7 +97,7 @@ function TablePaginationActions(props) {
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor:'#4B6DF1' /*"#60A1EC"*/,
+    backgroundColor:'#130C66' /*"#60A1EC"*/,
     color: theme.palette.common.white,
     width:150
   },
@@ -121,6 +128,7 @@ const useStyles = makeStyles({
 
 export default function CJobList({jobs}) {
   //search function
+  const dispatch = useDispatch();
   const [jobList, setJobList] = useState(jobs);
   console.log(jobs)
   const [searched, setSearched] = useState("");
@@ -157,7 +165,19 @@ export default function CJobList({jobs}) {
     navigate(`/dashboard/view-users/${id}`);
   };
 
-
+  const deleteJobFxn = (id) => {
+    const preserveId = id
+    
+  if(window.confirm("are you sure you want to delete this employee?")){
+   
+    dispatch(deleteSingleJob(id)); 
+    
+    notifySuccessFxn("Employee Successfully Deleted!");
+    
+   setTimeout(function(){window.location.reload()},3000);
+     
+  }
+}
   
 
   // const { doRequest, loading } = useRequest({
@@ -236,7 +256,7 @@ export default function CJobList({jobs}) {
                   {row.email}
                 </TableCell>
                 <TableCell style={{ width: 140 }} align="right">
-                {row.accountCreated && (new Date(row.accountCreated.seconds*1000)).toLocaleDateString()}
+                {row.accountCreated &&typeof(row.accountCreated) !== "string"  ?(new Date(row.accountCreated.seconds*1000)).toDateString():row.accountCreated}
                 </TableCell>
                 
                 <TableCell style={{ width: 140 }} align="right">
@@ -248,7 +268,7 @@ export default function CJobList({jobs}) {
                     // fullWidth
                     variant="contained"
                     style={{
-                      backgroundColor: '#4B6DF1'/*"#60A1EC"*/,
+                      backgroundColor: '#130C66'/*"#60A1EC"*/,
                       color: "white",
                       width: "70%",
                       fontSize: "15px",
@@ -267,13 +287,13 @@ export default function CJobList({jobs}) {
                     // fullWidth
                     variant="contained"
                     style={{
-                      backgroundColor: '#4B6DF1'/*"#60A1EC"*/,
+                      backgroundColor: '#130C66'/*"#60A1EC"*/,
                       color: "white",
                       width: "70%",
                       fontSize: "15px",
                     }}
                     sx={{ mt: 7, mb: 2 }}
-                    onClick={() => viewJobsFxn(row.id)}
+                    onClick={() => deleteJobFxn(row.id)}
                   >
                     DELETE
                   </Button>

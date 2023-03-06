@@ -10,8 +10,9 @@ import { notifyErrorFxn, notifySuccessFxn } from 'src/utils/toast-fxn';
       // Signed in
       var user = userCredential.user;
       console.log('Signed In user is: ', user.email);
+      dispatch(fetchUserData(user.uid, "sigin", navigate, setLoading));
       dispatch(loginSuccess({ user }));
-      navigate('/dashboard/home');
+      //navigate('/dashboard/home');
     })
     .catch((error) => {
       setLoading(false);
@@ -50,6 +51,28 @@ export const signup = (user, file, history, setLoading, url) => async (dispatch)
     setLoading(false);
   })
 }
+
+
+export const fetchUserData = (id, type, navigate, setLoading) => async (dispatch) => {
+  var user = db.collection("employers").doc(id);
+  user.get().then((doc) => {
+  if (doc.exists) {
+    // console.log("User Data:", doc.data());
+    dispatch(storeUserData(doc.data()));
+    if(type === "sigin"){
+      notifySuccessFxn("Logged In😊");
+      navigate('/dashboard/home', { replace: true });
+    }
+  } else {
+      setLoading(false);
+      notifyErrorFxn("Unauthorized❌")
+      console.log("No such document!");
+  }
+}).catch((error) => {
+  console.log("Error getting document:", error);
+});
+return user;
+};
 
 
 export const uploadImage = (user, file, history, setLoading) => async (dispatch) => {

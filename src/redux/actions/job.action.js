@@ -72,3 +72,14 @@ export const updateJob = (job, setLoading, history) => async (dispatch) => {
     });
 
 };
+
+export const deleteSingleJob = (id) => async (dispatch) => {
+    var job = db.collection("employees").doc(id);
+
+    job.delete().then(() => {
+     console.log("employee deleted")
+}).catch((error) => {
+    console.log("Error deleting document:", error);
+});
+
+};
