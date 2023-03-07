@@ -49,9 +49,9 @@ function NavItem({ item }) {
     <StyledNavItem
       component={RouterLink}
       to={path}
-      style={{height:"32px",marginTop:"-20px",marginBottom:"-20px"}}
+      style={{height:"32px",marginTop:"-10px",marginBottom:"-20px"}}
       sx={{
-        width:"100%",
+        width:"95%",
         borderRadius:"10px",
         
         '&.active': {
@@ -66,13 +66,13 @@ function NavItem({ item }) {
         
       }}
     >
-      {iconLabel !== 'msg' && iconLabel !== 'settings' && <StyledNavItemIcon sx={{color: '#FFFFFF', fontSize: '17px'}}>{icon && icon}</StyledNavItemIcon>}
+      {iconLabel !== 'msg' && iconLabel !== 'settings' && <StyledNavItemIcon sx={{color: '#FFFFFF', fontSize: '24px'}}>{icon && icon}</StyledNavItemIcon>}
       
       {iconLabel === 'msg' && <StyledNavItemIcon sx={{color: '#FFFFFF', fontSize: '17px'}}><MessageIcon /></StyledNavItemIcon>}
       
       {iconLabel === 'settings' && <StyledNavItemIcon sx={{color: '#FFFFFF', fontSize: '17px'}}><SettingsIcon /></StyledNavItemIcon>}
 
-      <ListItemText disableTypography primary={title} sx={{color: '#FFFFFF', fontSize: '15px'}}/>
+      <ListItemText disableTypography primary={title} sx={{color: '#FFFFFF', fontSize: '18px'}}/>
 
       {info && info}
     </StyledNavItem>

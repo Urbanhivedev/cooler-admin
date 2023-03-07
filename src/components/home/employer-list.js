@@ -97,7 +97,7 @@ function TablePaginationActions(props) {
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor:'#130C66' /*"#60A1EC"*/,
+    backgroundColor:/*'#130C66'*/ "#60A1EC",
     color: theme.palette.common.white,
     
   },
@@ -278,7 +278,7 @@ const dispatch = useDispatch()
                     // fullWidth
                     variant="contained"
                     style={{
-                      backgroundColor: '#130C66' /*"#60A1EC"*/,
+                      backgroundColor: /*'#130C66'*/ "#60A1EC",
                       color: "white",
                       width: "70%",
                       fontSize: "15px",
@@ -298,7 +298,7 @@ const dispatch = useDispatch()
                     // fullWidth
                     variant="contained"
                     style={{
-                      backgroundColor:'#130C66' /*"#60A1EC"*/,
+                      backgroundColor:/*'#130C66'*/ "#60A1EC",
                       color: "white",
                       width: "70%",
                       fontSize: "15px",

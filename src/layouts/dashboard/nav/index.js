@@ -17,7 +17,7 @@ import CoolerLogo from '../../../assets/images/Cooler.png';
 
 // ----------------------------------------------------------------------
 
-const NAV_WIDTH = 200;
+const NAV_WIDTH = 280;
 
 const StyledAccount = styled('div')(({ theme }) => ({
   display: 'flex',
@@ -72,7 +72,7 @@ export default function Nav({ openNav, onCloseNav }) {
               </Typography>
             </Box>
           </StyledAccount> */}
-          <img src={CoolerLogo} width="220" height="45"/>
+          <img src={CoolerLogo} width="220" height="60"/>
         </Link>
       </Box>
 

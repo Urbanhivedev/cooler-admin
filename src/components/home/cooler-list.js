@@ -96,7 +96,7 @@ function TablePaginationActions(props) {
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor:'#130C66' /*"#60A1EC"*/,
+    backgroundColor:/*'#130C66'*/ "#60A1EC",
     color: theme.palette.common.white,
     
   },
@@ -246,7 +246,7 @@ export default function CoolerList({jobs}) {
             
             variant="contained"
             style={{
-              backgroundColor: '#130C66' ,
+              backgroundColor: /*'#130C66'*/"#60A1EC" ,
               color: "white",
               fontSize: "15px",
               padding:"20px"
@@ -308,7 +308,7 @@ export default function CoolerList({jobs}) {
                     // fullWidth
                     variant="contained"
                     style={{
-                      backgroundColor: '#130C66' /*"#60A1EC"*/,
+                      backgroundColor: /*'#130C66'*/ "#60A1EC",
                       color: "white",
                       width: "70%",
                       fontSize: "15px",
@@ -327,7 +327,7 @@ export default function CoolerList({jobs}) {
                     // fullWidth
                     variant="contained"
                     style={{
-                      backgroundColor: '#130C66' /*"#60A1EC"*/,
+                      backgroundColor: /*'#130C66'*/ "#60A1EC",
                       color: "white",
                       width: "70%",
                       fontSize: "15px",

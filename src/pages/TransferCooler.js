@@ -258,7 +258,7 @@ export default function ViewCooler() {
                     //   width: "30%",
                       fontSize: "15px",
                     }}
-                    sx={{ mt: 3, mb: 2 , ml:3,p:2,backgroundColor:'#130C66' /*"#60A1EC"*/ }}
+                    sx={{ mt: 3, mb: 2 , ml:3,p:2,backgroundColor:/*'#130C66'*/ "#60A1EC" }}
                     onClick={() => {
                       navigate(`/dashboard/transfer-coolers/${params.id}`);
                     }}

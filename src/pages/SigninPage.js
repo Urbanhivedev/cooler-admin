@@ -80,7 +80,7 @@ export default function Signin() {
         <div style={{marginLeft: '20%'}}>
         <CssBaseline /><br/><br/>
         <div style={{marginLeft: '30%',marginBottom:"10%"}}>
-        <img src={MDliaison} alt=""  style={{backgroundColor: '#130C66' /*"#60A1EC"*/,padding:'20px',borderRadius:"10px"}}/>
+        <img src={MDliaison} alt=""  style={{backgroundColor: /*'#130C66'*/ "#60A1EC",padding:'20px',borderRadius:"10px"}}/>
         <p style={header}>ADMIN LOGIN</p>
         </div>
         <Box
@@ -140,7 +140,7 @@ export default function Signin() {
               type="button"
               // fullWidth
               variant="contained"
-              style={{backgroundColor:'#130C66' /*"#60A1EC"*/,color:"white", height:"40px", width: '30%',  fontSize:"15px"}}
+              style={{backgroundColor:/*'#130C66'*/ "#60A1EC",color:"white", height:"40px", width: '30%',  fontSize:"15px"}}
               onClick = {userSignin}
             //   sx={{ mt: 3, mb: 2 }}
             >
