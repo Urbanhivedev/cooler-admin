@@ -27,6 +27,7 @@ export default function CViewJob() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const params = useParams();
+    const location = useLocation();
 
 
     const { userDetails, error,message, isLoading } = useSelector((state) => state.loggedIn);
@@ -51,15 +52,15 @@ export default function CViewJob() {
    console.log("alternate date is:",new Date(Number(job.createdAt)*1000))
     useEffect(() => {
       dispatch(getSingleJob(params.id)); 
-
+    (job &&  dispatch(getSpecificCoolers(job.coolers?job.coolers:job.cooler))); 
       console.log("THIS EMPLOYEES DETAILS ARE FINALLY:",job)
      }, [])
 
      useEffect(() => {
-      dispatch(getSpecificCoolers(job.coolers)); 
+    job &&  dispatch(getSpecificCoolers(job.coolers?job.coolers:job.cooler)); 
     
        
-     }, [])
+     }, [params.id,job.coolers,location.state])
 
      console.log("what's in cooler groups",coolerGroups)
 
@@ -299,7 +300,7 @@ export default function CViewJob() {
         open={open}
         onClose={handleClose}
       >
-      {coolerGroups.length &&
+      { coolerGroups && coolerGroups.length ?
       
        coolerGroups.map((item)=>(
 
@@ -308,28 +309,14 @@ export default function CViewJob() {
         {item.groupName}
       </MenuItem>
        ))
-      
+      : 
+      <MenuItem onClick={handleClose} disableRipple>
+        no coolers joined yet
+        </MenuItem>
       }
 
 
 
-        {/*<MenuItem onClick={handleClose} disableRipple>
-          <PersonIcon />
-          Lamborghini Savers
-        </MenuItem>
-        <MenuItem onClick={handleClose} disableRipple>
-          <PersonIcon />
-          Investment Savers
-        </MenuItem>
-        <Divider sx={{ my: 0.5 }} />
-        <MenuItem onClick={handleClose} disableRipple>
-          <PersonIcon />
-          Japa Savers
-        </MenuItem>
-        <MenuItem onClick={handleClose} disableRipple>
-          <PersonIcon />
-          Investment Fund
-    </MenuItem>*/}
 
 
       </StyledMenu>
