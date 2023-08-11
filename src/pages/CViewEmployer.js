@@ -204,8 +204,12 @@ export default function CViewJob() {
              </Grid>
              
               <Grid item xs={12} md={8} lg={6} style={{height: '40%'}}>
-              <p style={{color: 'black'}}>{employer.accountCreated && new Date(employer.accountCreated.seconds*1000).toLocaleDateString()}
-                 </p>
+            {typeof(employer.accountCreated) !== "string" &&  <p style={{color: 'black'}}>{employer.accountCreated && new Date(employer.accountCreated.seconds*1000).toLocaleDateString()}
+                 </p>}
+
+              { typeof(employer.accountCreated) === "string" &&  <p style={{color: 'black'}}>{employer.accountCreated }
+                 </p>}
+
                  <Divider/>
              </Grid>
 

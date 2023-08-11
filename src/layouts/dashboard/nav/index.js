@@ -17,7 +17,7 @@ import CoolerLogo from '../../../assets/images/Cooler.png';
 
 // ----------------------------------------------------------------------
 
-const NAV_WIDTH = 280;
+const NAV_WIDTH = 250;
 
 const StyledAccount = styled('div')(({ theme }) => ({
   display: 'flex',

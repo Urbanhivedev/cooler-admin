@@ -190,7 +190,7 @@ export const payoutMember5 = (groupId, members, fee, payoutIndex, groupBal, filt
      })
 };
 export const payoutMember = (groupId, members, fee, payoutIndex, groupBal, numOfBatchPayment, payoutDate, filteredData, groupName) => async (dispatch) => {
-  console.log("hey payoutMember is working now");
+
   console.log({groupId, members, fee});
   if(groupBal >= fee){
   const date = new Date(payoutDate);
@@ -203,6 +203,12 @@ export const payoutMember = (groupId, members, fee, payoutIndex, groupBal, numOf
   date.setDate(Math.min(currentDate, date.getDate()));
   const newDate = date.toISOString().slice(0, 10);
   // console.log(newDate); 
+
+  let todaysDate = new Date().toISOString().slice(0, 10) //2018-08-03
+    var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    var today  = new Date();
+    const dateTransactions = today.toISOString();  
+
 
  const payIndexMembers = filteredData.map(m => m.members[m.payoutIndex]);
 
@@ -284,7 +290,21 @@ console.log(members[payoutIndex], count); // Output: 2
                   .doc(members[payoutIndex])
                   .update({
                     walletBalance: count > 1 ? newBal2 : newBal,
-                  }).then(() => {
+                  }). then(() => {
+                  
+    
+                    db.collection('transactions')
+                      .add({
+                          userID:members[payoutIndex],
+                          coolerID: groupId,
+                          type: `Monthly Payout from ${groupName} cooler`,
+                          amount: groupBal,
+                          date: todaysDate,
+                          createdAt: today.toLocaleDateString("en-US", options),
+                      })
+                  })
+                   
+                  .then(() => {
                     console.log("Payout success!");
                     notifySuccessFxn("Payout successful!");
                     window.location.href = '/dashboard/home';

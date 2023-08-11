@@ -134,7 +134,7 @@ export default function CoolerList({jobs}) {
   const { user } = useSelector((state) => state.auth);
   const {allGroups, myGroups, isLoading } = useSelector((state) => state.group);
   const [jobList, setJobList] = useState(jobs);
-  console.log(jobs)
+  console.log("the logged in user credentials are!:",user)
   
   useEffect(() => {
     dispatch(fetchGroups(user?.id));
@@ -168,7 +168,7 @@ export default function CoolerList({jobs}) {
     let today = new Date();
     let date = today.getFullYear()+'-'+("0"+(today.getMonth()+1)).slice(-2)+'-'+("0"+today.getDate()).slice(-2);
     let filteredData = allGroups.filter(item => item.payoutDate === date);
-    console.log("heyo")
+    
     if(filteredData.length){
      filteredData.map( (group, index) => {
        dispatch(payoutMember(group.groupId, group.members, parseInt(group.amount), group.payoutIndex, group.accountBalance, group.numOfBatchPayment, group.payoutDate, filteredData, group.groupName))
@@ -199,7 +199,7 @@ export default function CoolerList({jobs}) {
     navigate(`/dashboard/view-coolers/${id}`);
   };
 
-  const deleteCoolerFxn = (id) => {
+  const deleteCoolerFxn = (id,userId) => {
     const preserveId = id
     
   if(window.confirm("are you sure you want to delete this cooler?")){
@@ -273,7 +273,7 @@ export default function CoolerList({jobs}) {
               <StyledTableCell align="right">Total Amount</StyledTableCell>
               <StyledTableCell align="right">Registered On</StyledTableCell>
               <StyledTableCell align="right">Number in Group</StyledTableCell>
-              <StyledTableCell align="right">Status</StyledTableCell>
+              
               <StyledTableCell align="center"></StyledTableCell>
               <StyledTableCell align="right"></StyledTableCell>
             </TableRow>
@@ -299,9 +299,7 @@ export default function CoolerList({jobs}) {
                 <TableCell style={{ width: 140 }} align="right">
                 {row.noOfSavers && row.noOfSavers}
                 </TableCell>
-                <TableCell style={{ width: 140 }} align="right">
-                {row.status && row.status}
-                </TableCell>
+               
                 <TableCell style={{ width: 180 }} align="right">
                   <Button
                     type="submit"
@@ -333,7 +331,7 @@ export default function CoolerList({jobs}) {
                       fontSize: "15px",
                     }}
                     sx={{ mt: 7, mb: 2 }}
-                    onClick={() => deleteCoolerFxn(row.id)}
+                    onClick={() => deleteCoolerFxn(row.id,user.id)}
                   >
                     DELETE
                   </Button>

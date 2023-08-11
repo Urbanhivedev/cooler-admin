@@ -79,12 +79,25 @@ export const updateCooler = (cooler, setLoading, navigate) => async (dispatch) =
 
 };
 
-export const deleteSingleCooler = (id) => async (dispatch) => {
+export const deleteSingleCooler = (id,userId) => async (dispatch) => {
     var job = db.collection("groups").doc(id);
 
+    let todaysDate = new Date().toISOString().slice(0, 10) //2018-08-03
+    var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    var today  = new Date();
+    const date = today.toISOString(); 
+
     job.delete().then(() => {
-     console.log("cooler deleted")
-}).catch((error) => {
+        return db.collection('transactions')
+          .add({
+              userID:userId,
+              coolerID: id,
+              type: 'Cooler Deleted',
+              amount: 'N/A',
+              date: todaysDate,
+              createdAt: today.toLocaleDateString("en-US", options),
+          })
+      }).catch((error) => {
     console.log("Error deleting document:", error);
 });
 

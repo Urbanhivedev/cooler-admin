@@ -1,5 +1,5 @@
 import { db } from "../../config/firebase";
-import { fetchJobs, fetchSingleJob } from "../reducers/job.slice";
+import { fetchJobs, fetchSingleJob,saveCoolerGroups,isItLoading } from "../reducers/job.slice";
 
 
 export const getJobs = (uid) => async (dispatch) => {
@@ -30,6 +30,43 @@ export const getSingleJob = (id) => async (dispatch) => {
 
 };
 
+
+export const getSpecificCoolers = (idArray) => async (dispatch) => {
+    //var job = db.collection("groups").doc(id);
+
+
+ 
+ dispatch(isItLoading(true));
+  if(idArray.length){
+  db.collection('groups')
+    .where('groupId', 'in', idArray)
+    .get()
+    .then((snapshot) => {
+      const coolerGroups = snapshot.docs.map((doc) => ({ ...doc.data() }));
+      console.log("cooler groups THAT WERE FOUND : ", coolerGroups);
+      if (coolerGroups.length) {
+        dispatch(isItLoading(false));
+        console.log('coolerGroups Data IS ORIG:', coolerGroups);
+        dispatch(saveCoolerGroups(coolerGroups));
+      } else {
+        dispatch(isItLoading(false));
+        dispatch(saveCoolerGroups(coolerGroups));
+        console.log('this person is not part of any coolers!');
+      }
+    })
+    .catch((error) => {
+      console.log('Error getting coolers that THIS PERSON IS A PART OF:', error);
+      dispatch(isItLoading(false));
+    });
+  }else{
+    dispatch(isItLoading(false));
+    dispatch(saveCoolerGroups([]));
+  }
+
+};
+
+
+
 export const addJob = (job, setLoading, clearState) => async (dispatch) => {
     db.collection("employees").add({
         title: job.title,
@@ -50,6 +87,8 @@ export const addJob = (job, setLoading, clearState) => async (dispatch) => {
     });
 
 };
+
+
 export const updateJob = (job, setLoading, history) => async (dispatch) => {
 
     var jobRef = db.collection("employees").doc(job.id);

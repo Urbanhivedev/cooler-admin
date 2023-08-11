@@ -8,7 +8,7 @@ import { NavLink, useNavigate, useLocation,useParams} from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { styled,alpha } from '@mui/material/styles';
 import JobLogo from '../assets/images/Cooler.png';
-import { getSingleJob } from "../redux/actions/job.action";
+import { getSingleJob,getSpecificCoolers } from "../redux/actions/job.action";
 import { fetchGroupMembers } from "../redux/actions/group.action";
 import Skeleton from '@mui/material/Skeleton';
 
@@ -45,12 +45,23 @@ export default function CViewJob() {
    
    
     const { job } = useSelector((state) => state.jobs);
+    const { coolerGroups } = useSelector((state) => state.jobs);
 
+   console.log("THIS EMPLOYEES DETAILS ARE FULLY:",job)
+   console.log("alternate date is:",new Date(Number(job.createdAt)*1000))
     useEffect(() => {
       dispatch(getSingleJob(params.id)); 
 
-
+      console.log("THIS EMPLOYEES DETAILS ARE FINALLY:",job)
      }, [])
+
+     useEffect(() => {
+      dispatch(getSpecificCoolers(job.coolers)); 
+    
+       
+     }, [])
+
+     console.log("what's in cooler groups",coolerGroups)
 
 
     const myHeader = {
@@ -207,7 +218,8 @@ export default function CViewJob() {
              </Grid>
              
               <Grid item xs={12} md={8} lg={6} style={{height: '40%'}}>
-              <p style={{color: 'black'}}>{job.accountCreated && new Date(job.accountCreated.seconds*1000).toLocaleDateString()}
+              <p style={{color: 'black'}}>{job.accountCreated && typeof(job.accountCreated) !== 'string' && new Date(job.accountCreated.seconds*1000).toLocaleDateString()}
+                 {typeof(job.accountCreated) === 'string' && job.accountCreated}
                  </p>
                  <Divider/>
              </Grid>
@@ -221,7 +233,7 @@ export default function CViewJob() {
              <h3>EMPLOYER</h3>
             </Grid>
              <Grid item xs={12} md={8} lg={6} style={{height: '40%'}}>
-             <p style={{color: 'black'}}>{job.employeerNumber}
+             <p style={{color: 'black'}}>{job.employeerNumber && job.employeerNumber}{job.employerNumber && job.employerNumber}
                 </p>
                 <Divider/>
             </Grid>
@@ -254,14 +266,14 @@ export default function CViewJob() {
             </Grid>
             <Grid item xs={12} md={8} lg={6} style={{height: '40%',  marginTop: '1px'}}>
               
-             <p style={{color: 'black'}}>{job.accruedBalance}</p>
+             <p style={{color: 'black'}}>{job.accruedBalance && job.accruedBalance} {job.amountAccrued && job.amountAccrued }</p>
              <Divider/>
             </Grid>
 
             <Grid item xs={12} md={8} lg={2} style={{height: '40%'}}>   
             </Grid>
             <Grid item xs={4} md={6} lg={3} style={{border: '0px solid red', height: '50%',  marginTop: '1px', }}>
-             <h3>GROUPS</h3>
+             <h3>COOLERS</h3>
             </Grid>
             <Grid item xs={12} md={8} lg={6} style={{height: '40%',  marginTop:'1px' }}>
               
@@ -287,7 +299,21 @@ export default function CViewJob() {
         open={open}
         onClose={handleClose}
       >
+      {coolerGroups.length &&
+      
+       coolerGroups.map((item)=>(
+
         <MenuItem onClick={handleClose} disableRipple>
+        <PersonIcon />
+        {item.groupName}
+      </MenuItem>
+       ))
+      
+      }
+
+
+
+        {/*<MenuItem onClick={handleClose} disableRipple>
           <PersonIcon />
           Lamborghini Savers
         </MenuItem>
@@ -303,7 +329,9 @@ export default function CViewJob() {
         <MenuItem onClick={handleClose} disableRipple>
           <PersonIcon />
           Investment Fund
-        </MenuItem>
+    </MenuItem>*/}
+
+
       </StyledMenu>
 
              {/*<p style={{color: 'black'}}>{job.members}</p>*/}

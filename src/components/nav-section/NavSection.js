@@ -49,9 +49,9 @@ function NavItem({ item }) {
     <StyledNavItem
       component={RouterLink}
       to={path}
-      style={{height:"32px",marginTop:"-10px",marginBottom:"-20px"}}
+      style={{height:"48px",marginTop:"-30px",marginBottom:"-18px",position:"relative",top:"13px"}}
       sx={{
-        width:"95%",
+        width:"100%",
         borderRadius:"10px",
         
         '&.active': {
@@ -61,7 +61,6 @@ function NavItem({ item }) {
           fontWeight: 'fontWeightBold',
           borderRadius:"10px",
          
-
         },
         
       }}

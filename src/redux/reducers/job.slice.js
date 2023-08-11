@@ -2,9 +2,11 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   jobs: [],
-  job: null,
+  job: {},
   error: '',
   message: '',
+  coolerGroups:[],
+  isLoading: false,
 };
 
 const jobSlice = createSlice({
@@ -20,6 +22,12 @@ const jobSlice = createSlice({
         state.job = action.payload;
       },
 
+      saveCoolerGroups: (state, action) => {
+        state.coolerGroups = action.payload;
+      },
+      isItLoading: (state, action) => {
+        state.isLoading = action.payload;
+    },
     initiatePending: (state) => {
       state.isLoading = true;
       state.error = '';
@@ -38,6 +46,8 @@ const { actions, reducer } = jobSlice;
 export const {
  fetchJobs,
  fetchSingleJob,
+ saveCoolerGroups,
+ isItLoading
 } = actions;
 
 export default reducer;
