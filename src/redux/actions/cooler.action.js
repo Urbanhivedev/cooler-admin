@@ -1,6 +1,6 @@
 import { notifySuccessFxn,notifyErrorFxn } from "src/utils/toast-fxn";
 import { db } from "../../config/firebase";
-import { fetchCoolers, fetchSingleCooler } from "../reducers/cooler.slice";
+import { fetchCoolers, fetchSingleCooler,saveCoolersOfMember } from "../reducers/cooler.slice";
 
 
 export const getCoolers = (uid) => async (dispatch) => {
@@ -61,7 +61,7 @@ export const updateCooler = (cooler, setLoading, navigate) => async (dispatch) =
      coolerRef.update({
         amount: cooler.amount,
         admin: cooler.admin,
-        members: cooler.members,
+        members: cooler.memberIdsActive,
         noOfSavers: cooler.noOfSavers
     })
     .then(() => {
@@ -81,6 +81,34 @@ export const updateCooler = (cooler, setLoading, navigate) => async (dispatch) =
     });
 
 };
+
+export const fetchCoolersOfMember = (groupMembers) => async (dispatch) => {
+   
+    if(groupMembers.length){
+    db.collection('groups')
+      .where('groupId', 'in', groupMembers)
+      .get()
+      .then((snapshot) => {
+        const groupMemberDetails = snapshot.docs.map((doc) => ({ ...doc.data() }));
+        console.log("coolers for this Member full details are: ", groupMemberDetails);
+        if (groupMemberDetails.length) {
+          
+          console.log('users cooler Data:', groupMemberDetails);
+          dispatch(saveCoolersOfMember(groupMemberDetails));
+        } else {
+        
+          dispatch(saveCoolersOfMember([]));
+          console.log('No coolers for this user!');
+        }
+      })
+      .catch((error) => {
+        console.log('Error getting document:', error);
+      
+      });
+    }else{
+     dispatch(saveCoolersOfMember([]));
+    }
+  };
 
 export const deleteSingleCooler = (id,userId) => async (dispatch) => {
     var job = db.collection("groups").doc(id);

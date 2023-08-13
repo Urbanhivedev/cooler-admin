@@ -21,31 +21,11 @@ export default function UpdateCooler() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const params = useParams();
-    const locationV = useLocation();
+    const location = useLocation();
     const { cooler } = useSelector((state) => state.coolers);
     const [loading, setLoading] = useState(false);
 
-   // const initialState = {
-   //     amountAccrued: job ? job.amountAccrued : "",
-   //     groups: job ? job.groups : "",
-   //     walletBalance: job ? job.walletBalance : "",
-   //     loanBalance: job ? job.loanBalance : ""
-   //   };
-//
-   // const [
-   //     { amountAccrued,groups, walletBalance , loanBalance },
-   //     setState
-   //   ] = useState(initialState);
-
- //  const clearState = () => {
- //   setState({ ...initialState });
- // };
-//
- // const onChange = e => {
- //   const { name, value } = e.target;
- //   setState(prevState => ({  [name]: value }));
- // };
-
+ 
    const { groupMembers,isLoading } = useSelector((state) => state.group);
   
       const [amount,setAmount] = useState(cooler.amount)
@@ -117,7 +97,7 @@ export default function UpdateCooler() {
         e.preventDefault()
        
         const id  = params.id
-        const cooler = {id, amount, noOfSavers, admin,members}
+        const cooler = {id, amount, noOfSavers, admin,memberIdsActive}
         console.log(cooler)
         dispatch(updateCooler(cooler, setLoading, navigate))
        
@@ -231,11 +211,11 @@ export default function UpdateCooler() {
               
             </Grid>
  
-          
+          {memberNames.length && 
             <Grid item xs={12} md={12} lg={12} style={{border: '0px solid red', height: '50%', marginTop: '14px'}}>
              <h3>COOLER MEMBERS </h3>
             </Grid>
-
+          }
 
 
         {memberNames.length && 

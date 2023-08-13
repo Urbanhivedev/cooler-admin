@@ -20,6 +20,7 @@ import FileCopyIcon from '@mui/icons-material/FileCopy';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import EditIcon from '@mui/icons-material/Edit';
 
+import { fetchCoolersOfMember } from "../redux/actions/cooler.action";
 
 const theme = createTheme();
 
@@ -29,6 +30,7 @@ export default function CViewJob() {
     const params = useParams();
     const location = useLocation();
     const [fetched,setFetched] = useState(false)
+    const [wait,setWait] = useState(false)
 
 
     const { userDetails, error,message } = useSelector((state) => state.loggedIn);
@@ -55,7 +57,7 @@ export default function CViewJob() {
       dispatch(getSingleJob(params.id)); 
     //(job &&  dispatch(getSpecificCoolers(job.coolers?job.coolers:job.cooler))); 
       console.log("THIS EMPLOYEES DETAILS ARE FINALLY:",job)
-      setTimeout(()=>{setFetched(true)},1000)
+      setTimeout(()=>{setFetched(true)},100)
      }, [params.id,location.pathname])
 
      useEffect(() => {
@@ -344,10 +346,14 @@ export default function CViewJob() {
                     }}
                     sx={{ mt: 3, mb: 2 ,ml:3 ,p:2,backgroundColor:/*'#130C66'*/ "#60A1EC"}}
                     onClick={() => {
-                      navigate(`/dashboard/update-users/${params.id}`);
+
+                      dispatch(fetchCoolersOfMember(job.coolers)); 
+                      setWait(true)
+
+                     setTimeout(()=>{navigate(`/dashboard/update-users/${params.id}`)},1000)
                     }}
                   >
-                    UPDATE
+                   {wait?"Please wait...":"UPDATE"}
                   </Button>
 
           </Box>

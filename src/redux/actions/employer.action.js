@@ -50,13 +50,26 @@ export const addEmployer = (job, setLoading, clearState) => async (dispatch) => 
     });
 
 };
-export const updateEmployer = (job, setLoading, history) => async (dispatch) => {
+export const updateEmployer = (job,coolersToDelete,setLoading, history) => async (dispatch) => {
+
+  
+    coolersToDelete.forEach((item)=>{
+        var coolerRef = db.collection("groups").doc(item);
+       coolerRef.delete()
+
+
+    })
+
 
     var jobRef = db.collection("employers").doc(job.id);
     const jobData = jobRef.update({
-       
-        coolers: job.coolers,
-        groups: job.groups,
+        firstName:job.firstName,
+        lastName:job.lastName,
+        email:job.email,
+        employerNumber:job.employerNumber,
+        companyName:job.companyName,
+        /*coolers: job.coolers,
+        groups: job.groups,*/
         
     })
     .then(() => {

@@ -31,6 +31,8 @@ import { fetchAllGroups, fetchGroups, payoutMember } from 'src/redux/actions/gro
 import { notifyErrorFxn, notifySuccessFxn } from 'src/utils/toast-fxn';
 
 import { deleteSingleCooler } from "../../redux/actions/cooler.action";
+import { getSingleJob,getSpecificCoolers } from "../../redux/actions/job.action";
+import { getSingleEmployer } from "../../redux/actions/employer.action";
 
 function TablePaginationActions(props) {
   const theme = useTheme();
@@ -134,7 +136,10 @@ export default function CoolerList({jobs}) {
   const { user } = useSelector((state) => state.auth);
   const {allGroups, myGroups, isLoading } = useSelector((state) => state.group);
   const [jobList, setJobList] = useState(jobs);
-  console.log("the logged in user credentials are!:",user)
+
+
+ 
+
   
   useEffect(() => {
     dispatch(fetchGroups(user?.id));
@@ -196,7 +201,13 @@ export default function CoolerList({jobs}) {
     setPage(0);
   };
   const viewJobsFxn = (id) => {
-    navigate(`/dashboard/view-coolers/${id}`);
+     
+   
+
+    dispatch(fetchGroups(id));
+    dispatch(getSingleEmployer(id)); 
+
+   setTimeout(()=>{navigate(`/dashboard/view-coolers/${id}`)},1100)
   };
 
   const deleteCoolerFxn = (id,userId) => {

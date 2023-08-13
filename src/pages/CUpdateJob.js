@@ -11,6 +11,8 @@ import JobLogo from '../assets/images/Cooler.png';
 import { getSingleJob, updateJob } from "../redux/actions/job.action";
 import Skeleton from '@mui/material/Skeleton';
 
+import { fetchCoolersOfMember } from "../redux/actions/cooler.action";
+
 
 const theme = createTheme();
 
@@ -20,9 +22,12 @@ export default function CUpdateJob() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const params = useParams();
-    const locationV = useLocation();
+    const location = useLocation();
     const { job } = useSelector((state) => state.jobs);
     const [loading, setLoading] = useState(false);
+
+  const [fetched,setFetched] =useState(false)
+
 
    // const initialState = {
    //     amountAccrued: job ? job.amountAccrued : "",
@@ -45,12 +50,24 @@ export default function CUpdateJob() {
  //   setState(prevState => ({  [name]: value }));
  // };
   
-      const [amountAccrued,setAmountAccrued] = useState(job.amountAccrued)
-      const [coolers,setCoolers] = useState(job.coolers)
-      const [name,setName] = useState(job.firstName)
-      const [loanBalance,setLoanBalance] = useState(job.walletBalance)
-      const [walletBalance,setWalletBalance] = useState(job.loanBalance)
+      const [amountAccrued,setAmountAccrued] = useState(job.amountAccrued?job.amountAccrued:job.accruedBalance)
+     
+      const [firstName,setFirstName] = useState(job.firstName)
+      const [lastName,setLastName] = useState(job.lastName)
+      const [loanBalance,setLoanBalance] =  useState(job.loanBalance)
+      const [walletBalance,setWalletBalance] = useState(job.walletBalance)
 
+ 
+       const { coolersOfMember } = useSelector((state) => state.coolers);
+
+
+       const [coolers,setCoolers] = useState(job.coolers?job.coolers:job.cooler)
+      const [memberNames,setMemberNames] = useState([...coolersOfMember.map((item)=>(item.groupName))])
+      const [memberNamesActive,setMemberNamesActive] = useState([...coolersOfMember.map((item)=>(item.groupName))])
+     console.log("our cooler names are actually !",memberNames)
+
+      
+      const [memberIdsActive,setMemberIdsActive] = useState(job.coolers)
 
       const { userDetails, error,message, isLoading } = useSelector((state) => state.loggedIn);
     
@@ -69,9 +86,45 @@ export default function CUpdateJob() {
 
     useEffect(() => {
       dispatch(getSingleJob(params.id));  
-      console.log("JOB: ", job);
+      console.log("cooler ids: ", job.coolers);
+      setTimeout(()=>{setFetched(true)},1200)
      }, [])
+
+     useEffect(() => {
       
+      if(job && job.coolers){
+
+        dispatch(fetchCoolersOfMember(job.coolers)); 
+      }
+     }, [job,job.coolers,params.id,fetched,location.pathname])
+      
+
+     const deleteCoolers= (deletedItem,index)=> {
+
+      setMemberNamesActive(
+       memberNamesActive.filter((item)=>(item !== deletedItem))
+      )
+   
+      const idHolder = [...memberIdsActive]
+      idHolder.splice(index,1)
+ 
+      setMemberIdsActive(
+      idHolder
+      )
+   
+      console.log(memberNamesActive,"coolers name active is now")
+      console.log(memberIdsActive,"coolers id active is now!!!")
+
+    }
+
+
+
+    const  resetMemberBoth = ()=>{
+      setMemberNamesActive(memberNames)
+      setMemberIdsActive(coolers)
+
+    }
+
 
     const myHeader = {
       fontFamily: 'Arial',
@@ -88,7 +141,7 @@ export default function CUpdateJob() {
         e.preventDefault();
         setLoading(true);
         const id  = params.id
-        const job = {id, amountAccrued, coolers, walletBalance, loanBalance};
+        const job = {id, firstName,lastName,amountAccrued, memberIdsActive, walletBalance, loanBalance};
         console.log('JOB: ', job);
         dispatch(updateJob(job, setLoading, navigate));
     }
@@ -96,7 +149,7 @@ export default function CUpdateJob() {
   return (
       
          <Container maxWidth="lg" sx={{ mt: 3, mb: 4 }}>
-          {job != undefined && job != null ?
+          {job != undefined && job != null  &&fetched?
           
           <>
           <form component="form" onSubmit={updateJobFxn}>
@@ -138,41 +191,47 @@ export default function CUpdateJob() {
     </Paper>
     </Grid>         
              <Grid item xs={4} md={6} lg={3} style={{border: '0px solid red', height: '50%', marginTop: '14px'}}>
-             <h4>NAME</h4>
+             <h4>FIRST NAME</h4>
             </Grid>
              <Grid item xs={12} md={8} lg={6} style={{height: '40%'}}>
              <TextField fullWidth
-              label="Update Name"
+              label="Update first Name"
                id="fullWidth"
               
-               value={name}
-               name="amount accrued"
-               onChange={(e)=>setName(e.target.value)}
-               error={name === ""}
+               value={firstName}
+               name="first name"
+               onChange={(e)=>setFirstName(e.target.value)}
+               error={firstName === ""}
                />
             </Grid>
             <Grid item xs={12} md={8} lg={2} style={{height: '40%'}}>
               
             </Grid>
+
+
             <Grid item xs={4} md={6} lg={3} style={{border: '0px solid red', height: '50%', marginTop: '14px'}}>
-             <h4>COOLERS</h4>
+             <h4>LAST NAME</h4>
             </Grid>
              <Grid item xs={12} md={8} lg={6} style={{height: '40%'}}>
              <TextField fullWidth
-              label="Ammend coolers"
-              id="fullWidth" 
+              label="Update last Name"
+               id="fullWidth"
               
-              multiline
-              rows={6}
-              maxRows={12}
-              value={coolers}
-              name="coolers"
-              onChange={(e)=>setCoolers(e.target.value)}
-              error={coolers === ""}
-              />
+               value={lastName}
+               name="last name"
+               onChange={(e)=>setLastName(e.target.value)}
+               error={lastName === ""}
+               />
             </Grid>
             <Grid item xs={12} md={8} lg={2} style={{height: '40%'}}>
+              
             </Grid>
+
+
+
+            
+
+
             <Grid item xs={4} md={6} lg={3} style={{border: '0px solid red', height: '50%', marginTop: '14px'}}>
              <h4>WALLET BALANCE ($)</h4>
             </Grid>
@@ -200,14 +259,99 @@ export default function CUpdateJob() {
              label="Enter New Accrued Balance"
             
              id="fullWidth"
-             value={amountAccrued} 
+             value={amountAccrued && amountAccrued} 
              name="wallet Balace"
-             onChange={(e)=>setAmountAccrued(e.target.value)}
+             onChange={(e)=>{setAmountAccrued(e.target.value)}}
              error={setAmountAccrued === ""}
              />
             </Grid>
             <Grid item xs={12} md={8} lg={2} style={{height: '40%'}}>   
+
             </Grid>
+
+     {memberNames && memberNames.length && 
+        
+            <Grid item xs={12} md={12} lg={12} style={{border: '0px solid red', height: '50%', marginTop: '14px',display:memberNames.length?"block":"none"}}>
+             <h3>COOLER GROUPS </h3>
+            </Grid>
+          }
+
+            {memberNames && 
+        
+        memberNamesActive.map((item,i)=>(
+          <>
+              
+
+           
+
+
+              <Grid item xs={12} md={8} lg={2} style={{height: '40%'}}>
+              
+              </Grid>
+
+
+             <Grid item xs={12} md={8} lg={6} style={{height: '40%',marginLeft:"8%",display:"flex",justifyContent:"center",alignItems:"center",gap:"3rem",position:"relative"}}>
+             <TextField 
+             sx={{width:"70%"}}
+             label={i==0?"Delete a name to remove a member":'' }
+             id="fullWidth"
+             value={item}
+             name="Member"
+            
+             error={memberNames[i] === ""}
+             />
+
+            <Button
+                    type="button"
+                    // fullWidth
+                    variant="contained"
+                    style={{
+                      backgroundColor:/*'#130C66'*/ "#60A1EC",
+                      color: "white",
+                    //   width: "30%",
+                      fontSize: "15px",
+                      height: '40%',
+                      padding:"15px",
+
+                    }}
+                    sx={{ }}
+                    onClick={(e)=>deleteCoolers(item,i)}
+                  >
+                   DELETE
+              </Button>
+
+            </Grid>
+
+            
+            <Grid item xs={12} md={12} lg={12} style={{height: '40%'}}>
+              
+              </Grid>
+
+         
+            
+         
+         </>
+          )
+          )}
+        {memberNames &&  memberNames.length && 
+         <center style={{display:memberNames.length?"block":"none",margin:"0 auto"}}>
+         <Button
+          type="button"
+          variant="contained"
+          style={{
+            backgroundColor:"#60A1EC",
+            color: "white",
+          //  width: "30%",
+            fontSize: "15px",
+            padding:"20px",
+          }}
+          sx={{  mb: 2 }}
+          onClick={(e)=>resetMemberBoth()}
+        >
+         UNDO
+        </Button>
+        </center>
+          }
 
            {/* <Grid item xs={4} md={6} lg={3} style={{border: '0px solid red', height: '50%', marginTop: '14px'}}>
              <h4>LOAN BALANCE ($)</h4>
@@ -238,7 +382,7 @@ export default function CUpdateJob() {
                       padding:"20px",
                       backgroundColor:/*'#130C66'*/ "#60A1EC",
                       color: "white",
-                    //   width: "30%",
+                       width: "35%",
                       fontSize: "15px",
                     }}
                     sx={{ mt: 7, mb: 2 }}

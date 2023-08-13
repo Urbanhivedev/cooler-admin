@@ -22,6 +22,8 @@ import { Link, NavLink, useNavigate} from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import { notifyErrorFxn, notifySuccessFxn } from 'src/utils/toast-fxn';
 
+import { getSingleEmployer } from "../../redux/actions/employer.action";
+import { fetchGroups } from 'src/redux/actions/group.action';
 
 import { useDispatch, useSelector } from "react-redux";
 import { deleteSingleEmployer } from "../../redux/actions/employer.action";
@@ -163,7 +165,13 @@ const dispatch = useDispatch()
     setPage(0);
   };
   const viewJobsFxn = (id) => {
-    navigate(`/dashboard/view-employers/${id}`);
+ 
+    dispatch(fetchGroups(id));
+    dispatch(getSingleEmployer(id)); 
+
+   setTimeout(()=>{navigate(`/dashboard/view-employers/${id}`)},1100)
+
+   
   };
 
   const { message } = useSelector((state) => state.employers);

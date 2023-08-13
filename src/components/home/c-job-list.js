@@ -31,6 +31,7 @@ import { notifyErrorFxn, notifySuccessFxn } from 'src/utils/toast-fxn';
 
 import { useDispatch, useSelector } from "react-redux";
 
+import { getSingleJob,getSpecificCoolers } from "../../redux/actions/job.action";
 import { deleteSingleJob } from "../../redux/actions/job.action";
 
 function TablePaginationActions(props) {
@@ -126,10 +127,13 @@ const useStyles = makeStyles({
   },
 });
 
+
 export default function CJobList({jobs}) {
   //search function
   const dispatch = useDispatch();
   const [jobList, setJobList] = useState(jobs);
+  const [wait,setWait] = useState(false)
+  const { job } = useSelector((state) => state.jobs);
   console.log(jobs)
   const [searched, setSearched] = useState("");
   const classes = useStyles();
@@ -162,7 +166,14 @@ export default function CJobList({jobs}) {
     setPage(0);
   };
   const viewJobsFxn = (id) => {
-    navigate(`/dashboard/view-users/${id}`);
+
+
+    dispatch(getSingleJob(id)); 
+    job &&  dispatch(getSpecificCoolers(job.coolers?job.coolers:job.cooler)); 
+
+    setWait(true)
+
+   setTimeout(()=>{navigate(`/dashboard/view-users/${id}`)},1100)
   };
 
   const deleteJobFxn = (id) => {

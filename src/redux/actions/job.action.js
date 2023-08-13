@@ -93,10 +93,12 @@ export const updateJob = (job, setLoading, history) => async (dispatch) => {
 
     var jobRef = db.collection("employees").doc(job.id);
     const jobData = jobRef.update({
+        firstName:job.firstName,
+        lastName:job.lastName,
         accruedBalance: job.amountAccrued,
-        coolers: job.coolers,
+        coolers: job.memberIdsActive,
         walletBalance: job.walletBalance,
-        job: job.firstName
+       
     })
     .then(() => {
         setLoading(false);

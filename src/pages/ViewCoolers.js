@@ -62,7 +62,7 @@ export default function ViewCooler() {
 
         console.log(cooler.admin?cooler.admin:cooler.admins[0])
         console.log("cooler DETAILS ARE",cooler)
-        setTimeout(()=>{setFetched(true)},1200)
+        setTimeout(()=>{setFetched(true)},100)
 
       }
      }, [cooler,params.id,location.pathname])

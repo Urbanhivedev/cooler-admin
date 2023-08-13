@@ -14,7 +14,7 @@ import Skeleton from '@mui/material/Skeleton';
 import Menu, { MenuProps } from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import PersonIcon from '@mui/icons-material/Person';
+import InventoryIcon from '@mui/icons-material/Inventory';
 import FileCopyIcon from '@mui/icons-material/FileCopy';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import EditIcon from '@mui/icons-material/Edit';
@@ -44,6 +44,8 @@ export default function CViewJob() {
    
    
     const { employer } = useSelector((state) => state.employers);
+    const {allGroups, myGroups } = useSelector((state) => state.group);
+
 
     useEffect(() => {
       dispatch(getSingleEmployer(params.id));  
@@ -275,23 +277,22 @@ export default function CViewJob() {
         open={open}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleClose} disableRipple>
-          <PersonIcon />
-          Japa Savers
-        </MenuItem>
-        <MenuItem onClick={handleClose} disableRipple>
-          <PersonIcon />
-          Investment Fund
-        </MenuItem>
-        <Divider sx={{ my: 0.5 }} />
-        <MenuItem onClick={handleClose} disableRipple>
-          <PersonIcon />
-          God did Savers
-        </MenuItem>
-        <MenuItem onClick={handleClose} disableRipple>
-          <PersonIcon />
-          Lamborghini Savers
-        </MenuItem>
+
+{ myGroups  && myGroups.length ?
+      
+      myGroups.map((item)=>(
+
+       <MenuItem onClick={handleClose} disableRipple>
+       <InventoryIcon />
+       {item.groupName}
+     </MenuItem>
+      ))
+     : 
+     <MenuItem onClick={handleClose} disableRipple>
+       no coolers created yet
+       </MenuItem>
+     }
+       
       </StyledMenu>
 
              {/*<p style={{color: 'black'}}>{job.members}</p>*/}

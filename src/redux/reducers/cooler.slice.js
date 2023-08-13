@@ -1,11 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+
 const initialState = {
   coolers: [],
   cooler: null,
   error: '',
   message: '',
+  coolersOfMember:[]
 };
+
 
 const coolerSlice = createSlice({
   name: 'cooler',
@@ -18,6 +21,9 @@ const coolerSlice = createSlice({
       },
     fetchSingleCooler: (state, action) => {
         state.cooler = action.payload;
+      },
+      saveCoolersOfMember: (state, action) => {
+        state.coolersOfMember = action.payload;
       },
 
     initiatePending: (state) => {
@@ -38,6 +44,7 @@ const { actions, reducer } = coolerSlice;
 export const {
  fetchCoolers,
  fetchSingleCooler,
+ saveCoolersOfMember
 } = actions;
 
 export default reducer;
