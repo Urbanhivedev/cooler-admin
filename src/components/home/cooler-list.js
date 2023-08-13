@@ -297,7 +297,7 @@ export default function CoolerList({jobs}) {
                 {row.accountCreated &&typeof(row.accountCreated) !== "string"  ?(new Date(row.accountCreated.seconds*1000)).toDateString():row.accountCreated}
                 </TableCell>
                 <TableCell style={{ width: 140 }} align="right">
-                {row.noOfSavers && row.noOfSavers}
+                {row.members && row.members.length}
                 </TableCell>
                
                 <TableCell style={{ width: 180 }} align="right">

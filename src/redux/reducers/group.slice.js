@@ -4,6 +4,7 @@ const initialState = {
        myGroups: [], 
        groupMembers: [], 
        allGroups:[],
+       coolerAdmin:{},
        message: '',
       isLoading: false,
 };
@@ -21,6 +22,9 @@ const groupSlice = createSlice({
     saveGroups: (state, action) => {
         state.allGroups = action.payload;
     },
+    saveCoolerAdmin: (state, action) => {
+      state.coolerAdmin = action.payload;
+  },
     isItLoading: (state, action) => {
       state.isLoading = action.payload;
   },
@@ -37,6 +41,7 @@ const { actions, reducer } = groupSlice;
 export const {
  saveMyGroup,
  saveGroupMembers,
+ saveCoolerAdmin,
  saveGroups,
  isItLoading,
  clearGroup

@@ -50,7 +50,7 @@ export const getSpecificCoolers = (idArray) => async (dispatch) => {
         dispatch(saveCoolerGroups(coolerGroups));
       } else {
         dispatch(isItLoading(false));
-        dispatch(saveCoolerGroups([]));
+        dispatch(saveCoolerGroups(coolerGroups));
         console.log('this person is not part of any coolers!');
       }
     })

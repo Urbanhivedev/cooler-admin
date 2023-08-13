@@ -9,7 +9,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { styled,alpha } from '@mui/material/styles';
 import JobLogo from '../assets/images/Cooler.png';
 import { getSingleCooler } from "../redux/actions/cooler.action";
-import { fetchGroupMembers } from "src/redux/actions/group.action";
+import { fetchGroupMembers,fetchCoolerAdmin } from "src/redux/actions/group.action";
 
 import Skeleton from '@mui/material/Skeleton';
 
@@ -28,10 +28,14 @@ const theme = createTheme();
 export default function ViewCooler() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const location =useLocation();
     const params = useParams();
-   
-   const [groupPeople,setGroupPeople] = useState(["loading..."])
 
+    const { groupMembers,coolerAdmin,isLoading } = useSelector((state) => state.group);
+    console.log("MIKE SAYS COOLER ADMIN",coolerAdmin)
+   
+ 
+  const [fetched,setFetched] =useState(false)
 
 
 
@@ -42,19 +46,38 @@ export default function ViewCooler() {
       
      }, [])
 
-     const { groupMembers } = useSelector((state) => state.group);
+    
 
+/*1 */
      useEffect(() => {
       
       if(cooler){
         
         dispatch(fetchGroupMembers(cooler.members)); 
-        groupMembers.length?setGroupPeople(groupMembers):setGroupPeople([{firstName:"No one has",lastName:"joined this group."}])
+       
+        console.log("SALLY says group members ARE",groupMembers)
+        
+       
+        dispatch(fetchCoolerAdmin(cooler.admin?cooler.admin:cooler.admins[0],cooler.members)); 
 
+        console.log(cooler.admin?cooler.admin:cooler.admins[0])
+        console.log("cooler DETAILS ARE",cooler)
+        setTimeout(()=>{setFetched(true)},1200)
 
-        console.log(groupPeople)
       }
-     }, [cooler])
+     }, [cooler,params.id,location.pathname])
+
+
+     /*2 */
+   useEffect(() => {
+      
+      if(cooler && cooler.admin||cooler && cooler.admins ){
+
+        dispatch(fetchGroupMembers(cooler.members)); 
+        dispatch(fetchCoolerAdmin(cooler.admin?cooler.admin:cooler.admins[0],cooler.members)); 
+        
+      }
+     }, [cooler,params.id,location.pathname])
 
 
 
@@ -148,7 +171,7 @@ export default function ViewCooler() {
   return (
       
          <Container maxWidth="lg" sx={{ mt: 3, mb: 4 }}>
-          {cooler != undefined && cooler != null ?
+          {cooler != undefined && cooler != null  && fetched?
           
           <>
           <Grid container spacing={2}>
@@ -226,7 +249,7 @@ export default function ViewCooler() {
              <h3>ADMIN EMAIL</h3>
             </Grid>
              <Grid item xs={12} md={8} lg={6} style={{height: '40%'}}>
-             <p style={{color: 'black'}}>{cooler.admin}
+             <p style={{color: 'black'}}>{coolerAdmin?coolerAdmin.email:"loading..."}
                 </p>
                 <Divider/>
             </Grid>
@@ -234,12 +257,26 @@ export default function ViewCooler() {
             </Grid>
 
             <Grid item xs={4} md={6} lg={3} style={{border: '0px solid red', height: '50%',  marginTop: '1px'}}>
-             <h3>NO. SAVERS</h3>
+             <h3> MAX NO. SAVERS</h3>
             </Grid>
             <Grid item xs={12} md={8} lg={6} style={{height: '40%',  marginTop: '1px'}}>
              <p style={{color: 'black'}}>{cooler.noOfSavers}</p>
              <Divider/>
             </Grid>
+
+            <Grid item xs={12} md={8} lg={2} style={{height: '40%'}}>
+            </Grid>
+            <Grid item xs={4} md={6} lg={3} style={{border: '0px solid red', height: '50%',  marginTop: '1px'}}>
+             <h3> CURRENT NO. SAVERS</h3>
+            </Grid>
+            <Grid item xs={12} md={8} lg={6} style={{height: '40%',  marginTop: '1px'}}>
+             <p style={{color: 'black'}}>{cooler.members.length}</p>
+             <Divider/>
+            </Grid>
+           
+            
+
+
             <Grid item xs={12} md={8} lg={2} style={{height: '40%'}}>   
             </Grid>
             <Grid item xs={4} md={6} lg={3} style={{border: '0px solid red', height: '50%',  marginTop: '1px'}}>
@@ -291,8 +328,8 @@ export default function ViewCooler() {
         open={open}
         onClose={handleClose}
       >
-        {
-         groupPeople.map((item)=>{
+        {groupMembers &&
+         groupMembers.map((item)=>{
           return(
             <MenuItem onClick={handleClose} disableRipple>
             <PersonIcon />

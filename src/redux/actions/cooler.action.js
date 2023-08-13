@@ -1,3 +1,4 @@
+import { notifySuccessFxn,notifyErrorFxn } from "src/utils/toast-fxn";
 import { db } from "../../config/firebase";
 import { fetchCoolers, fetchSingleCooler } from "../reducers/cooler.slice";
 
@@ -67,13 +68,15 @@ export const updateCooler = (cooler, setLoading, navigate) => async (dispatch) =
         
 
         setLoading(false);
-        alert('cooler has been updated.✔');
+        //alert('cooler has been updated.✔');
+        notifySuccessFxn('cooler has been updated.✔')
         navigate('/dashboard/create-cooler');
         
     })
     .catch((error) => {
         console.error("Error updating document: ", error.message);
          alert(/*'Error updating job.❌',*/error.message)
+         notifyErrorFxn(error.message)
         setLoading(false);
     });
 

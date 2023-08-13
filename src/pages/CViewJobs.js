@@ -28,9 +28,10 @@ export default function CViewJob() {
     const navigate = useNavigate();
     const params = useParams();
     const location = useLocation();
+    const [fetched,setFetched] = useState(false)
 
 
-    const { userDetails, error,message, isLoading } = useSelector((state) => state.loggedIn);
+    const { userDetails, error,message } = useSelector((state) => state.loggedIn);
     
     useEffect(() => {
       console.log(userDetails)
@@ -46,21 +47,22 @@ export default function CViewJob() {
    
    
     const { job } = useSelector((state) => state.jobs);
-    const { coolerGroups } = useSelector((state) => state.jobs);
+    const { coolerGroups,isLoading } = useSelector((state) => state.jobs);
 
    console.log("THIS EMPLOYEES DETAILS ARE FULLY:",job)
    console.log("alternate date is:",new Date(Number(job.createdAt)*1000))
     useEffect(() => {
       dispatch(getSingleJob(params.id)); 
-    (job &&  dispatch(getSpecificCoolers(job.coolers?job.coolers:job.cooler))); 
+    //(job &&  dispatch(getSpecificCoolers(job.coolers?job.coolers:job.cooler))); 
       console.log("THIS EMPLOYEES DETAILS ARE FINALLY:",job)
-     }, [])
+      setTimeout(()=>{setFetched(true)},1000)
+     }, [params.id,location.pathname])
 
      useEffect(() => {
     job &&  dispatch(getSpecificCoolers(job.coolers?job.coolers:job.cooler)); 
     
        
-     }, [params.id,job.coolers,location.state])
+     }, [params.id,job.coolers,job.cooler,location.pathname,fetched])
 
      console.log("what's in cooler groups",coolerGroups)
 
@@ -155,7 +157,7 @@ export default function CViewJob() {
   return (
       
          <Container maxWidth="lg" sx={{ mt: 3, mb: 4 }}>
-          {job != undefined && job != null ?
+          {job != undefined && job != null && fetched ?
           
           <>
           <Grid container spacing={2}>
@@ -300,7 +302,7 @@ export default function CViewJob() {
         open={open}
         onClose={handleClose}
       >
-      { coolerGroups && coolerGroups.length ?
+      { coolerGroups  && coolerGroups.length && fetched?
       
        coolerGroups.map((item)=>(
 

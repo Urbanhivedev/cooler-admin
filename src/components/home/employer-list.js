@@ -244,7 +244,7 @@ const dispatch = useDispatch()
               <StyledTableCell>Company Name</StyledTableCell>
               <StyledTableCell align="right">Email</StyledTableCell>
               <StyledTableCell align="right">Registered On</StyledTableCell>
-              <StyledTableCell align="right">Number in Group</StyledTableCell>
+              <StyledTableCell align="right">Company Number</StyledTableCell>
              
               <StyledTableCell align="right"></StyledTableCell>
               <StyledTableCell align="right"></StyledTableCell>

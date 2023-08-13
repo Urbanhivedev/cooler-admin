@@ -10,6 +10,7 @@ import {
   saveMyGroup,
   savePrivateGroup,
   savePublicGroup,
+  saveCoolerAdmin
 } from '../reducers/group.slice';
 
 export const createGroup = (groupData, user, file, navigate, setLoading, url) => async (dispatch) => {
@@ -136,15 +137,15 @@ export const fetchGroupMembers = (groupMembers) => async (dispatch) => {
     .where('id', 'in', groupMembers)
     .get()
     .then((snapshot) => {
-      const groupMembers = snapshot.docs.map((doc) => ({ ...doc.data() }));
-      console.log("Group Members is: ", groupMembers);
-      if (groupMembers.length) {
+      const groupMemberDetails = snapshot.docs.map((doc) => ({ ...doc.data() }));
+      console.log("Group Members full details, are: ", groupMemberDetails);
+      if (groupMemberDetails.length) {
         dispatch(isItLoading(false));
-        console.log('groupMembers Data:', groupMembers);
-        dispatch(saveGroupMembers(groupMembers));
+        console.log('groupMembers Data:', groupMemberDetails);
+        dispatch(saveGroupMembers(groupMemberDetails));
       } else {
         dispatch(isItLoading(false));
-        dispatch(saveGroupMembers(groupMembers));
+        dispatch(saveGroupMembers(groupMemberDetails));
         console.log('No group members!');
       }
     })
@@ -154,9 +155,38 @@ export const fetchGroupMembers = (groupMembers) => async (dispatch) => {
     });
   }else{
     dispatch(isItLoading(false));
-    dispatch(saveGroupMembers(groupMembers));
+    dispatch(saveGroupMembers([]));
   }
 };
+
+
+export const fetchCoolerAdmin = (adminId,groupMembers) => async (dispatch) => {
+  dispatch(isItLoading(true));
+  var job = db.collection("employers").doc(adminId);
+  dispatch(fetchGroupMembers(groupMembers))
+
+    job.get().then((doc) => {
+    if (doc.exists) {
+        console.log("Document data for admin of THIS COOLER:", doc.data());
+        dispatch(saveCoolerAdmin(doc.data()));
+        dispatch(isItLoading(false));
+    } else {
+        console.log("No such for admin to be fetched!");
+        console.log("input adminId is:", adminId);
+        dispatch(saveCoolerAdmin({}));
+        dispatch(isItLoading(false));
+    }
+}).catch((error) => {
+    console.log("Error getting admiN info:", error);
+});
+
+
+//YOU ARE HERE , CHANGE THE CODE ABOVE !
+
+}
+
+
+
 
 export const payoutMember5 = (groupId, members, fee, payoutIndex, groupBal, filteredData) => async (dispatch) => {
   console.log({groupId, members, fee});
